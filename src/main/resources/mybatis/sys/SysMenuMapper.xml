@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.king.library.sys.mapper.SysMenuMapper">
+
+    <resultMap id="BaseResultMap" type="com.king.library.sys.pojo.SysMenu">
+        <id column="menu_id" jdbcType="VARCHAR" property="menuId" />
+        <id column="menu_name" jdbcType="VARCHAR" property="menuName" />
+        <id column="menu_url" jdbcType="VARCHAR" property="menuUrl" />
+        <id column="parent_menu_id" jdbcType="VARCHAR" property="parentMenuId" />
+        <id column="icon_cls" jdbcType="VARCHAR" property="iconCls" />
+    </resultMap>
+
+    <insert id="save" parameterType="SysMenu">
+		INSERT INTO sys_menu (menu_name, menu_url, parent_menu_id)
+    	VALUES (#{menuName, jdbcType=VARCHAR},
+    			#{menuUrl, jdbcType=VARCHAR},
+    			#{parentMenuId, jdbcType=VARCHAR})
+	</insert>
+
+    <insert id="inserBatch">
+		INSERT INTO sys_menu (menu_id,menu_name, menu_url, parent_menu_id,icon_cls)
+    	VALUES
+        <foreach item="item" index="index" collection="list" open="" separator="," close="">
+            (#{item.menuId},#{item.menuName}, #{item.menuUrl},
+            #{item.parentMenuId},#{item.iconCls})
+        </foreach>
+	</insert>
+
+    <update id="update" parameterType="SysMenu">
+  		UPDATE sys_menu
+  		SET
+  			menu_name = #{menuName, jdbcType=VARCHAR},
+			menu_url = #{menuUrl, jdbcType=VARCHAR},
+			parent_menu_id = #{parentMenuId, jdbcType=VARCHAR}
+  		where menu_id = #{menuId}
+	</update>
+
+    <delete id="delete" parameterType="string">
+    	DELETE FROM sys_menu
+    	WHERE menu_id = #{menuId}
+    </delete>
+
+    <select id="findAll" resultMap="BaseResultMap">
+		select * from sys_menu WHERE icon_cls IS NOT NULL;
+	</select>
+
+    <select id="findByChildId"  resultMap="BaseResultMap">
+        select distinct m.menu_id, m.menu_name, m.menu_url, m.parent_menu_id
+        from sys_menu m
+
+        start with m.menu_id in
+        <foreach item="item" index="index" collection="list"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+
+        connect by prior m.parent_menu_id = m.menu_id
+    </select>
+
+</mapper>

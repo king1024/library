@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.0rg">
+<head>
+    <meta charset="UTF-8">
+    <title>yong</title>
+    <link rel="stylesheet" th:href="@{/js/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/js/login/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/js/login/css/form-elements.css}">
+    <link rel="stylesheet" th:href="@{/js/login/css/style.css}">
+
+    <link rel="shortcut icon" th:href="@{/js/login/ico/favicon.png}">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" th:href="@{/js/login/ico/apple-touch-icon-144-precomposed.png}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" th:href="@{/js/login/ico/apple-touch-icon-114-precomposed.png}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" th:href="@{/js/login/ico/apple-touch-icon-72-precomposed.png}">
+    <link rel="apple-touch-icon-precomposed" th:href="@{/js/login/ico/apple-touch-icon-57-precomposed.png}">
+    <style>
+        html {
+            width: 100%;
+            height: 100%;
+        }
+        body {
+            width: 100%;
+            height: 100%;
+        }
+        .full-size {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <img class="full-size" th:src="@{/image/login_bg.jpg}" style="position: absolute; z-index: -999999;left: 0; margin: 0px; padding: 0px; border: none;">
+<!-- Top content -->
+<div class="top-content full-size">
+
+    <div>
+        <div class="container">
+            <div class="row" style="margin-top: 5%;">
+                <div class="col-sm-8 col-sm-offset-2 text">
+                    <h3 style="color: #ffffff;font-size: 30px"><strong>Spring Boot+MyBatis-Plus+Redis框架总结</strong> </h3>
+                    <div class="description">
+                        <p>
+                            Duan Yong
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3 form-box">
+                    <div class="form-top">
+                        <div class="form-top-left">
+                            <h3>本次总结</h3>
+                            <p style="margin-left: 100px;">生命不息，学习不止!</p>
+                        </div>
+                        <div class="form-top-right">
+                            <i class="fa fa-key"></i>
+                        </div>
+                    </div>
+                    <div class="form-bottom">
+                        <form role="form" action="" method="post" class="login-form">
+                            <div class="form-group">
+                                <label class="sr-only" for="username">Username</label>
+                                <input type="text" name="username" placeholder="user" class="form-username form-control" id="form-username">
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="password">Password</label>
+                                <input type="password" name="password" placeholder="123456" class="form-password form-control" id="form-password">
+                            </div>
+                            <button type="submit" class="btn">Sign in!</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3 social-login">
+                    <div class="social-login-buttons">
+                        <a class="btn btn-link-1 btn-link-1-facebook" href="#">
+                            <i class="fa fa-facebook"></i> Spring
+                        </a>
+                        <a class="btn btn-link-1 btn-link-1-twitter" href="#">
+                            <i class="fa fa-twitter"></i> Redis
+                        </a>
+                        <a class="btn btn-link-1 btn-link-1-google-plus" href="#">
+                            <i class="fa fa-google-plus"></i> Active MQ
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Javascript -->
+<script th:src="@{/js/login/js/jquery-1.11.1.min.js}"></script>
+<script th:src="@{/js/login/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/login/js/jquery.backstretch.min.js}"></script>
+<script th:src="@{/js/login/js/scripts.js}"></script>
+<script th:src="@{/js/login/js/placeholder.js}"></script>
+<!--[if lt IE 10]>
+<![endif]-->
+</body>
+
+</html>
+
