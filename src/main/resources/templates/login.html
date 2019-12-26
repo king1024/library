@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <title>yong</title>
     <link rel="stylesheet" th:href="@{/js/bootstrap/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/js/login/font-awesome/css/font-awesome.min.css}">
-    <link rel="stylesheet" th:href="@{/js/login/css/form-elements.css}">
-    <link rel="stylesheet" th:href="@{/js/login/css/style.css}">
+    <link rel="stylesheet" th:href="@{/fonts/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/login/form-elements.css}">
+    <link rel="stylesheet" th:href="@{/css/login/style.css}">
 
-    <link rel="shortcut icon" th:href="@{/js/login/ico/favicon.png}">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" th:href="@{/js/login/ico/apple-touch-icon-144-precomposed.png}">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" th:href="@{/js/login/ico/apple-touch-icon-114-precomposed.png}">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" th:href="@{/js/login/ico/apple-touch-icon-72-precomposed.png}">
-    <link rel="apple-touch-icon-precomposed" th:href="@{/js/login/ico/apple-touch-icon-57-precomposed.png}">
+    <script type="text/javascript" th:src="@{/js/miniui/miniui.js}"></script>
+
+    <link rel="shortcut icon" th:href="@{/image/login/favicon.png}">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" th:href="@{/image/login/apple-touch-icon-144-precomposed.png}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" th:href="@{/image/login/apple-touch-icon-114-precomposed.png}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" th:href="@{/image/login/apple-touch-icon-72-precomposed.png}">
+    <link rel="apple-touch-icon-precomposed" th:href="@{/image/login/apple-touch-icon-57-precomposed.png}">
     <style>
         html {
             width: 100%;
@@ -62,11 +64,11 @@
                         <form role="form" action="/auth/login" method="post" class="login-form">
                             <div class="form-group">
                                 <label class="sr-only" for="username">Username</label>
-                                <input type="text" name="username" placeholder="user" class="form-username form-control" value="root" id="form-username">
+                                <input type="text" name="username" placeholder="用户名" class="form-username form-control" value="root" id="form-username">
                             </div>
                             <div class="form-group">
                                 <label class="sr-only" for="password">Password</label>
-                                <input type="password" name="password" placeholder="123456" class="form-password form-control" value="root" id="form-password">
+                                <input type="password" name="password" placeholder="密码" class="form-password form-control" value="root" id="form-password">
                             </div>
                             <p style="color: #d84f4b;text-align: center;" th:text="${message}"></p>
                             <button type="submit" class="btn">Sign in!</button>
@@ -94,14 +96,7 @@
 
 </div>
 
-<!-- Javascript -->
-<script th:src="@{/js/login/js/jquery-1.11.1.min.js}"></script>
-<script th:src="@{/js/login/bootstrap/js/bootstrap.min.js}"></script>
-<script th:src="@{/js/login/js/jquery.backstretch.min.js}"></script>
-<script th:src="@{/js/login/js/scripts.js}"></script>
-<script th:src="@{/js/login/js/placeholder.js}"></script>
-<!--[if lt IE 10]>
-<![endif]-->
+<script th:src="@{/js/login/scripts.js}"></script>
 </body>
 
 </html>

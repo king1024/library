@@ -80,6 +80,7 @@
         var menu = new Menu("#mainMenu", {
             itemclick: function (item) {
                 if (!item.children) {
+                    console.log(item);
                     activeTab(item);
                 }
             }
