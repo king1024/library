@@ -2,6 +2,7 @@ package com.king.library.common.tools;
 
 import com.king.library.common.model.MenuNode;
 import com.king.library.sys.pojo.SysMenu;
+import com.king.library.sys.pojo.SysResources;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +14,7 @@ import java.util.Map;
  * @desc:
  */
 public class MenuTree {
-//    private List<SysMenu> menuList = new ArrayList<SysMenu>();
     private List<MenuNode> menuList=new ArrayList<MenuNode>();
-//    public MenuTree(List<SysMenu> menuList) {
-//        this.menuList=menuList;
-//    }
 
     public MenuTree() {
     }
@@ -29,8 +26,16 @@ public class MenuTree {
         }
         return builTree();
     }
-//    (String id, String text, String iconCls, String url, String state, String parentMenuId, List<MenuNode> children)
-    //建立树形结构
+
+    public List<MenuNode> buildSysMenuByResources(List<SysResources> resourcesList){
+        for(SysResources resources : resourcesList) {
+            System.out.println(resources);
+            menuList.add(new MenuNode(resources.getId().toString(),resources.getName(),resources.getIcon(),
+                    resources.getUrl(),"",resources.getParentId().toString()));
+        }
+        return builTree();
+    }
+
     public List<MenuNode> builTree(){
         List<MenuNode> treeMenus =new  ArrayList<MenuNode>();
         for(MenuNode menuNode : getRootNode()) {
@@ -58,7 +63,7 @@ public class MenuTree {
     private List<MenuNode> getRootNode() {
         List<MenuNode> rootMenuLists =new  ArrayList<MenuNode>();
         for(MenuNode menuNode : menuList) {
-            if(StringTools.isEmpty(menuNode.getParentMenuId())) {
+            if(StringTools.isEmpty(menuNode.getParentMenuId()) || "0".equals(menuNode.getParentMenuId())) {
                 rootMenuLists.add(menuNode);
             }
         }

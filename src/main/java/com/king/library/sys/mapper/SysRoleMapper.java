@@ -4,15 +4,15 @@ import com.king.library.sys.pojo.SysRole;
 import java.util.List;
 
 public interface SysRoleMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(SysRole record);
 
-    SysRole selectByPrimaryKey(Integer id);
+    SysRole selectByPrimaryKey(Long id);
 
     List<SysRole> selectAll();
 
     int updateByPrimaryKey(SysRole record);
 
-    List<SysRole> findRolesByUser(String userName);
+    List<SysRole> selectRolesByUserId(Integer id);
 }

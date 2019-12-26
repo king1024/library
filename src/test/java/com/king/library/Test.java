@@ -7,20 +7,11 @@ package com.king.library;
  */
 public class Test {
     public static void main(String[] args) {
-        String s="aaaaa";
-        int i=0;
-        while(true){
-            s += s+"============================================"+i;
-        }
+        String str=null;
+        String format="";
+        str=String.format("","&......%￥1");
+        System.out.println(str);
+
     }
 
-    public static void test01(){
-        test01();
-        System.out.println("test01 over");
-    }
-
-    public static void test02(){
-
-        System.out.println("test02 over");
-    }
 }

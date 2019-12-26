@@ -50,12 +50,21 @@
         <table tableName="sys_role" domainObjectName="SysRole"></table>
         <table tableName="sys_role_menu" domainObjectName="RoleMenu"></table>
         <table tableName="sys_role_permission" domainObjectName="SysRolePermission"></table>
+        <table tableName="tableName" domainObjectName="TableName"></table>
 
-        <table tableName="sys_permission" domainObjectName="SysPermission"></table>
+
+SELECT * FROM sys_user;
+SELECT * FROM sys_user_role;
+SELECT * FROM sys_role;
+SELECT * FROM sys_role_resources;
+SELECT * FROM sys_resources;
+
         <table tableName="sys_user" domainObjectName="SysUser"></table>
+        <table tableName="sys_user_role" domainObjectName="SysUserRole"></table>
         <table tableName="sys_role" domainObjectName="SysRole"></table>
-        <table tableName="sys_role_permission" domainObjectName="SysRolePermission"></table>
-        -->
+        <table tableName="sys_role_resources" domainObjectName="SysRoleResources"></table>
+        <table tableName="sys_resources" domainObjectName="sysResources"></table>
+-->
         <table tableName="tableName" domainObjectName="TableName"></table>
     </context>
 </generatorConfiguration>

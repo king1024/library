@@ -34,7 +34,7 @@
                 </li>
                 <li><a href="#"><i class="fa fa-arrows-alt"></i>全屏</a></li>
                 <li><a href="#"><i class="fa fa-lock "></i>锁住系统</a></li>
-                <li><a href="#" onclick="logout()"><i class="fa fa-key "></i>注销</a></li>
+                <li><a href="/auth/logout"><i class="fa fa-key "></i>注销</a></li>
             </ul>
         </li>
     </ul>
@@ -63,7 +63,8 @@
 </body>
 </html>
 
-<script type="text/javascript">
+<script th:inline="javascript">
+    var menuData=[[${menu}]];
     function activeTab(item) {
         var tabs = mini.get("mainTabs");
         var tab = tabs.getTab(item.id);
@@ -75,7 +76,6 @@
     }
 
     $(function () {
-
         //menu
         var menu = new Menu("#mainMenu", {
             itemclick: function (item) {
@@ -84,7 +84,9 @@
                 }
             }
         });
-
+        debugger;
+        menu.loadData(menuData);
+/*
         $.ajax({
             url:"/sys/menu/sidemenu2",
             type:"POST",
@@ -94,6 +96,7 @@
                 menu.loadData(data);
             }
         });
+ */
 
         //dropdown
         $(".dropdown-toggle").click(function (event) {
@@ -107,13 +110,15 @@
     });
 
     function logout(){
+        /*
         $.ajax({
-            url:"/login/logout",
+            url:"/auth/logout",
             type:"POST",
             dataType:"json",
             success: function (text) {
                 location.reload();
             }
         })
+        */
     }
 </script>

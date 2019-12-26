@@ -4,40 +4,58 @@ import java.util.Date;
 import java.util.List;
 
 public class SysRole {
-    private Integer id;
+    private Long id;
 
-    private String roleName;
+    private String name;
+
+    private String description;
+
+    private Boolean available;
 
     private Date createTime;
 
     private Date updateTime;
 
-    private String deleteStatus;
+    private List<SysResources> sysResources;
 
-    private List<SysPermission> permissions;
-
-    public List<SysPermission> getPermissions() {
-        return permissions;
+    public List<SysResources> getSysResources() {
+        return sysResources;
     }
 
-    public void setPermissions(List<SysPermission> permissions) {
-        this.permissions = permissions;
+    public void setSysResources(List<SysResources> sysResources) {
+        this.sysResources = sysResources;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getRoleName() {
-        return roleName;
+    public String getName() {
+        return name;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Boolean getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 
     public Date getCreateTime() {
@@ -54,13 +72,5 @@ public class SysRole {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public String getDeleteStatus() {
-        return deleteStatus;
-    }
-
-    public void setDeleteStatus(String deleteStatus) {
-        this.deleteStatus = deleteStatus;
     }
 }

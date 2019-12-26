@@ -1,6 +1,10 @@
 package com.king.library.sys.service;
 
+import com.king.library.sys.mapper.SysResourcesMapper;
+import com.king.library.sys.mapper.SysRoleMapper;
 import com.king.library.sys.mapper.SysUserMapper;
+import com.king.library.sys.pojo.SysResources;
+import com.king.library.sys.pojo.SysRole;
 import com.king.library.sys.pojo.SysUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,12 +19,16 @@ import java.util.List;
 public class SysUserService {
     @Autowired
     private SysUserMapper sysUserMapper;
+    @Autowired
+    private SysResourcesMapper sysResourcesMapper;
+    @Autowired
+    private SysRoleMapper sysRoleMapper;
 
     /**
      * 用户列表
      */
     public List<SysUser> listUser(SysUser sysUser) {
-        return sysUserMapper.selectUser(sysUser);
+        return sysUserMapper.findUser(sysUser);
     }
 
     /**
@@ -36,4 +44,20 @@ public class SysUserService {
     public void updateUser(SysUser sysUser) {
         sysUserMapper.updateByPrimaryKey(sysUser);
     }
+
+    public SysUser getUserByName(String username) {
+        SysUser user=null;
+       List<SysUser> users = sysUserMapper.getUserByName(username);
+       if (users!=null && users.size()==1){
+            user=users.get(0);
+            List<SysRole> roles=sysRoleMapper.selectRolesByUserId(user.getId());
+            for(SysRole role:roles){
+                List<SysResources> resources=sysResourcesMapper.selectResByRoleId(role.getId());
+                role.setSysResources(resources);
+            }
+            user.setRoles(roles);
+       }
+       return user;
+    }
+
 }

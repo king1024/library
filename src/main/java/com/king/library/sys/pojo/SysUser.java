@@ -12,13 +12,35 @@ public class SysUser {
 
     private String nickname;
 
-    private Integer roleId;
+    private String mobile;
+
+    private String email;
+
+    private String qq;
+
+    private Date birthday;
+
+    private Byte gender;
+
+    private String avatar;
+
+    private String userType;
+
+    private String regIp;
+
+    private String lastLoginIp;
+
+    private Date lastLoginTime;
+
+    private Integer loginCount;
+
+    private String remark;
+
+    private Integer status;
 
     private Date createTime;
 
     private Date updateTime;
-
-    private String deleteStatus;
 
     private List<SysRole> roles;
 
@@ -62,12 +84,108 @@ public class SysUser {
         this.nickname = nickname;
     }
 
-    public Integer getRoleId() {
-        return roleId;
+    public String getMobile() {
+        return mobile;
     }
 
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getQq() {
+        return qq;
+    }
+
+    public void setQq(String qq) {
+        this.qq = qq;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public Byte getGender() {
+        return gender;
+    }
+
+    public void setGender(Byte gender) {
+        this.gender = gender;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
+    public String getRegIp() {
+        return regIp;
+    }
+
+    public void setRegIp(String regIp) {
+        this.regIp = regIp;
+    }
+
+    public String getLastLoginIp() {
+        return lastLoginIp;
+    }
+
+    public void setLastLoginIp(String lastLoginIp) {
+        this.lastLoginIp = lastLoginIp;
+    }
+
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
+
+    public Integer getLoginCount() {
+        return loginCount;
+    }
+
+    public void setLoginCount(Integer loginCount) {
+        this.loginCount = loginCount;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public Date getCreateTime() {
@@ -84,13 +202,5 @@ public class SysUser {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public String getDeleteStatus() {
-        return deleteStatus;
-    }
-
-    public void setDeleteStatus(String deleteStatus) {
-        this.deleteStatus = deleteStatus;
     }
 }
