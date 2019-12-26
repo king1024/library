@@ -1,4 +1,4 @@
-package com.king.library.common.web;
+package com.king.library.sys.web;
 
 import com.alibaba.fastjson.JSONObject;
 import com.king.library.common.tools.CommonUtil;

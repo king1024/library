@@ -22,4 +22,8 @@ public class SysRoleService {
     public List<SysRole> findRolesByUser(Integer userId){
         return sysRoleMapper.selectRolesByUserId(userId);
     }
+
+    public List<SysRole> findAllRoles(){
+        return sysRoleMapper.selectAll();
+    }
 }

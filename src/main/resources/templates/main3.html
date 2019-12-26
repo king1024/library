@@ -64,11 +64,13 @@
 </html>
 
 <script th:inline="javascript">
+    mini.parse();
     var menuData=[[${menu}]];
     function activeTab(item) {
         var tabs = mini.get("mainTabs");
         var tab = tabs.getTab(item.id);
         if (!tab) {
+            console.log(item.iconCls);
             tab = { name: item.id, title: item.text, url: item.url, iconCls: item.iconCls, showCloseButton: true };
             tab = tabs.addTab(tab);
         }
@@ -80,14 +82,12 @@
         var menu = new Menu("#mainMenu", {
             itemclick: function (item) {
                 if (!item.children) {
-                    console.log(item);
                     activeTab(item);
                 }
             }
         });
-        debugger;
         menu.loadData(menuData);
-/*
+       /*
         $.ajax({
             url:"/sys/menu/sidemenu2",
             type:"POST",
@@ -97,8 +97,7 @@
                 menu.loadData(data);
             }
         });
- */
-
+*/
         //dropdown
         $(".dropdown-toggle").click(function (event) {
             $(this).parent().addClass("open");
