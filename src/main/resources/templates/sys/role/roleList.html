@@ -19,6 +19,7 @@
      sizeList="[20,30,50,100]" pageSize="20"
      showHeader="true" title="角色列表" >
     <div property="columns">
+        <div field="id" width="120" headerAlign="center" align="center" renderer="onOptionRenderer">操作</div>
         <div type="indexcolumn" ></div>
         <div field="id" width="120" headerAlign="center">id</div>
         <div field="description" width="120" headerAlign="center" >角色描述</div>
@@ -31,7 +32,6 @@
 </body>
 <script>
     mini.parse();
-    // var grid=$("#datagrid1");
     var grid=mini.get("datagrid1");
     $(function(){
         $.ajax({
@@ -43,5 +43,26 @@
             }
         });
     });
+    function onOptionRenderer(e){
+        var record=e.record;
+        var html='<i class="fa fa-font-awesome" onclick="updateRes(\''+record.id+'\')"></i>'
+        return html;
+    }
+    function updateRes(e){
+        //新增弹窗
+        mini.open({
+            url: "/page/sys/res/resTree",
+            title: "信息页面",
+            width: "800",
+            height: "600",
+            onload: function () {
+                var iframe = this.getIFrameEl();
+                iframe.contentWindow.setData(e);
+            },
+            ondestroy: function (action) {
+                grid.reload();
+            }
+        });
+    }
 </script>
 </html>

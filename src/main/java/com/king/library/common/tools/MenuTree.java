@@ -29,7 +29,6 @@ public class MenuTree {
 
     public List<MenuNode> buildSysMenuByResources(List<SysResources> resourcesList){
         for(SysResources resources : resourcesList) {
-            System.out.println(resources);
             menuList.add(new MenuNode(resources.getId().toString(),resources.getName(),resources.getIcon(),
                     resources.getUrl(),"",resources.getParentId().toString()));
         }

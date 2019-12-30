@@ -26,7 +26,6 @@ public class SysMenuController {
     @RequestMapping("list")
     @ResponseBody
     public List<SysMenu> list() {
-        System.out.println("--------------------"+6666);
         List<SysMenu> menu = sysMenuService.findAll();
         return menu;
     }
@@ -34,7 +33,6 @@ public class SysMenuController {
     @RequestMapping("sidemenu")
     @ResponseBody
     public List<MenuNode> sidemenu() {
-        System.out.println("--------------------"+7777);
         List<MenuNode> menu = sysMenuService.sidemenu();
         return menu;
     }
@@ -42,7 +40,6 @@ public class SysMenuController {
     @RequestMapping("sidemenu2")
     @ResponseBody
     public List<MenuNode> sidemenu2() {
-        System.out.println("--------------------"+2222);
         List<MenuNode> menu = sysMenuService.sidemenu();
         return menu;
     }

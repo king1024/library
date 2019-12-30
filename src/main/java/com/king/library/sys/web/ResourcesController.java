@@ -2,6 +2,7 @@ package com.king.library.sys.web;
 
 import com.king.library.common.model.PageVo;
 import com.king.library.common.model.ResponseVo;
+import com.king.library.common.model.TreeNode;
 import com.king.library.sys.pojo.SysResources;
 import com.king.library.sys.service.SysResourcesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,13 @@ public class ResourcesController {
         pageVo.setData(allResources);
         pageVo.setTotalCount(allResources.size());
         return pageVo;
+    }
+
+    @ResponseBody
+    @RequestMapping("treeData")
+    public List<TreeNode> getTreeData(int userId){
+        List<TreeNode> treeNodes = sysResourcesService.getTreeData(userId);
+        return treeNodes;
     }
 
     @ResponseBody

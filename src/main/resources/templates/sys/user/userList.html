@@ -31,6 +31,7 @@
     <div property="columns">
         <div type="checkcolumn" ></div>
         <div type="indexcolumn" ></div>
+        <div field="id" width="120" headerAlign="center" align="center" renderer="onOptionRenderer">操作</div>
         <div field="id" width="120" headerAlign="center">id</div>
         <div field="username" width="120" headerAlign="center" >用户编号
             <input property="editor" class="mini-textbox" style="width:100%;"/>
@@ -61,7 +62,6 @@
     grid.load();
     function save(){
         var data = grid.getChanges();
-        console.log(data);
         $.ajax({
             url: "/resources/update",
             data: JSON.stringify(data),
@@ -77,6 +77,28 @@
     function onIFRenderer(e) {
         if (e.value == 1) return "是";
         else return "否";
+    }
+
+    function onOptionRenderer(e){
+        var record=e.record;
+        var html='<i class="fa fa-font-awesome" onclick="addRoles(\''+record.id+'\')"></i>'
+        return html;
+    }
+    function addRoles(e){
+        //新增弹窗
+        mini.open({
+            url: "/page/sys/role/roleTree",
+            title: "信息页面",
+            width: "800",
+            height: "600",
+            onload: function () {
+                var iframe = this.getIFrameEl();
+                iframe.contentWindow.setData(e);
+            },
+            ondestroy: function (action) {
+                grid.reload();
+            }
+        });
     }
 </script>
 </html>

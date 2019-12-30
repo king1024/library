@@ -3,6 +3,7 @@ package com.king.library.sys.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.king.library.common.constants.StatusEnum;
 import com.king.library.common.model.ResponseVo;
+import com.king.library.common.model.TreeNode;
 import com.king.library.sys.pojo.SysResources;
 
 import java.util.List;
@@ -21,4 +22,11 @@ public interface SysResourcesService extends IService<SysResources> {
     public ResponseVo saveResource(SysResources res);
 
     public ResponseVo updateRes(List<SysResources> resList) ;
+
+    /**
+     * 获取用户的树结构数据
+     * @param userId
+     * @return
+     */
+    List<TreeNode> getTreeData(int userId);
 }

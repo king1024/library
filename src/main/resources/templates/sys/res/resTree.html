@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.0rg">
+<head th:include="common.html"></head>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div style="padding-bottom:5px;">
+    <a class="mini-button" iconCls="fa-save" onclick="save()" style="float: right">保存</a>
+</div>
+<div>
+    <ul id="tree1" class="mini-tree" style="width:300px;padding:5px;"
+        expandOnLoad="0"
+        textField="text" idField="id" parentField="parentId"
+        showTreeIcon="true" showCheckBox="true" resultAsTree="false">
+    </ul>
+</div>
+
+</body>
+<script>
+    mini.parse();
+
+    var tree=mini.get("tree1");
+
+    var roleId="";
+    function setData(e){
+        roleId=e;
+        tree.setUrl("/resources/treeData?userId="+roleId);
+        tree.load();
+    }
+
+    function save(){
+        var data = tree.getCheckedNodes(true);
+        console.log(data);
+        if(data.length==0){
+            alert("nononono");
+            return ;
+        }
+        var resIds=new Array();
+        for(var item of data){
+            resIds.push(item.id);
+        }
+        var param={};
+        param.resIds=resIds;
+        param.roleId=roleId;
+        $.ajax({
+            url: "/sysRole/updateRoleRes",
+            data: JSON.stringify(param),
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (text) {
+                if(text.status==200){
+                    alert("更新成功！");
+                    closeWindow("ok","");
+                }else {
+                    alert("更新失败！");
+                }
+
+            }
+        });
+    }
+
+    function closeWindow(active,a){
+        if(window.CloseOwnerWindow){
+            return window.CloseOwnerWindow(active,a);
+        }else{
+            window.close();
+        }
+
+    }
+</script>
+</html>

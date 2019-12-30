@@ -1,7 +1,10 @@
 package com.king.library.sys.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.king.library.common.model.ResponseVo;
 import com.king.library.sys.pojo.SysRoleResources;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,11 @@ import com.king.library.sys.pojo.SysRoleResources;
  */
 public interface SysRoleResourcesService extends IService<SysRoleResources> {
 
+    /**
+     * 修改角色拥有的资源权限
+     * @param userId
+     * @param roleIds
+     * @return
+     */
+    ResponseVo updateRoleRes(Long roleId, List<String> resIds);
 }

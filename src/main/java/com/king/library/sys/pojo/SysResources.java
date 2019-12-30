@@ -174,4 +174,37 @@ public class SysResources extends Model<SysResources> {
                 ", updateTime=" + updateTime +
                 "}";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        SysResources resources = (SysResources) o;
+
+        if (!id.equals(resources.id)) {
+            return false;
+        }
+        if (!name.equals(resources.name)) {
+            return false;
+        }
+        if (!type.equals(resources.type)) {
+            return false;
+        }
+        if(permission==null){
+            if(resources.permission!=null){
+                return false;
+            }
+        }else{
+            if (!permission.equals(resources.permission)) {
+                return false;
+            }
+        }
+        return parentId.equals(resources.parentId);
+    }
+
 }

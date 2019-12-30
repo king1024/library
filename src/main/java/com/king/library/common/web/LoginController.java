@@ -97,7 +97,6 @@ public class LoginController {
 	 */
 	@RequestMapping("/logout")
 	public String logout() {
-		System.out.println("logout----------------------------------->");
 		try {
 			Subject currentUser = SecurityUtils.getSubject();
 			currentUser.logout();

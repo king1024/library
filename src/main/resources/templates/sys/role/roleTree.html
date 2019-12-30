@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.0rg">
+<head th:include="common.html"></head>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div style="padding-bottom:5px;margin-bottom: 5px;" >
+    <div><span>当前角色:&nbsp;</span><span id="roleList"></span></div>
+    <a class="mini-button" iconCls="fa-save" style="float: right;" onclick="save()">保存</a>
+
+</div>
+<!--url="/sysRole/datas"-->
+<div id="datagrid1" class="mini-datagrid" style="width:100%;height:550px;margin-top: 5px;"
+     idField="id" allowResize="true" multiSelect="true"
+     sizeList="[20,30,50,100]" pageSize="20"
+     showHeader="true" title="角色列表" >
+    <div property="columns">
+        <div type="checkcolumn" ></div>
+        <div type="indexcolumn" ></div>
+        <div field="id" width="120" headerAlign="center">id</div>
+        <div field="description" width="120" headerAlign="center" >角色描述</div>
+        <div field="name" width="100"  align="center" headerAlign="center">角色代码</div>
+        <div field="available" align="right" width="100" headerAlign="center" renderer="onGenderRenderer">是否可用</div>
+        <div field="createTime" width="100" headerAlign="center" dateFormat="yyyy-MM-dd">创建时间</div>
+        <div field="updateTime" width="100" headerAlign="center" dateFormat="yyyy-MM-dd">修改时间</div>
+    </div>
+</div>
+</body>
+<script>
+    mini.parse();
+    var userId="";
+    // var grid=$("#datagrid1");
+    var grid=mini.get("datagrid1");
+    $(function(){
+        $.ajax({
+            url:"/sysRole/datas",
+            type:"POST",
+            dataType:"json",
+            success: function (text) {
+                grid.setData(text);
+            }
+        });
+    });
+
+    function setData(e){
+        userId=e;
+        $.ajax({
+            url:"/sysRole/getDataByUserId?userId="+userId,
+            type:"POST",
+            dataType:"json",
+            success: function (data){
+                if(data!=null && data.length>0){
+                    var roleNames="";
+                    for(var item of data){
+                        roleNames += item.description +",";
+                    }
+                    if(roleNames.length>1){
+                        roleNames=roleNames.substring(0,roleNames.length-1)
+                    }
+                    $("#roleList").html(roleNames);
+                }
+            }
+        });
+
+        $("#roleList").html(e);
+    }
+
+    function save(){
+        var data = grid.getSelecteds ( );
+        if(data.length==0){
+            alert("nononono");
+            return ;
+        }
+        var roleids=new Array();
+        for(var item of data){
+            roleids.push(item.id);
+        }
+        var param={};
+        param.roleids=roleids;
+        param.userId=userId;
+        $.ajax({
+            url: "/user/updateRoles",
+            data: JSON.stringify(param),
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (text) {
+                if(text.status==200){
+                    alert("更新成功！");
+                    closeWindow("ok","");
+                }else {
+                    alert("更新失败！");
+                }
+
+            }
+        });
+    }
+
+    function closeWindow(active,a){
+        if(window.CloseOwnerWindow){
+            return window.CloseOwnerWindow(active,a);
+        }else{
+            window.close();
+        }
+
+    }
+</script>
+</html>
