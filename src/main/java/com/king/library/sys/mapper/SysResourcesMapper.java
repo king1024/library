@@ -2,17 +2,17 @@ package com.king.library.sys.mapper;
 
 import com.king.library.sys.pojo.SysResources;
 import java.util.List;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
-public interface SysResourcesMapper {
-    int deleteByPrimaryKey(Long id);
-
-    int insert(SysResources record);
-
-    SysResources selectByPrimaryKey(Long id);
-
-    List<SysResources> selectAll();
-
-    int updateByPrimaryKey(SysResources record);
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author duanyong
+ * @since 2019-12-27
+ */
+public interface SysResourcesMapper extends BaseMapper<SysResources> {
 
     List<SysResources> selectResByRoleId(Long id);
 

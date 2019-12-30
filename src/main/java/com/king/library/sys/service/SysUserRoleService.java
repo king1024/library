@@ -1,7 +1,7 @@
 package com.king.library.sys.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.king.library.sys.pojo.SysUser;
+import com.king.library.sys.pojo.SysUserRole;
 
 /**
  * <p>
@@ -11,6 +11,6 @@ import com.king.library.sys.pojo.SysUser;
  * @author duanyong
  * @since 2019-12-27
  */
-public interface SysUserService extends IService<SysUser> {
-    public SysUser getUserByName(String username);
+public interface SysUserRoleService extends IService<SysUserRole> {
+
 }

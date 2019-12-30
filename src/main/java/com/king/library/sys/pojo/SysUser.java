@@ -1,47 +1,117 @@
 package com.king.library.sys.pojo;
 
-import java.util.Date;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
+import java.time.LocalDate;
+import com.baomidou.mybatisplus.annotation.TableId;
+import java.time.LocalDateTime;
+import java.io.Serializable;
 import java.util.List;
 
-public class SysUser {
+/**
+ * <p>
+ *
+ * </p>
+ *
+ * @author duanyong
+ * @since 2019-12-27
+ */
+public class SysUser extends Model<SysUser> {
+
+    private static final long serialVersionUID=1L;
+
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     private String username;
 
+    /**
+     * 登录密码
+     */
     private String password;
 
+    /**
+     * 昵称
+     */
     private String nickname;
 
+    /**
+     * 手机号
+     */
     private String mobile;
 
+    /**
+     * 邮箱地址
+     */
     private String email;
 
+    /**
+     * QQ
+     */
     private String qq;
 
-    private Date birthday;
+    /**
+     * 生日
+     */
+    private LocalDate birthday;
 
-    private Byte gender;
+    /**
+     * 性别
+     */
+    private Integer gender;
 
+    /**
+     * 头像地址
+     */
     private String avatar;
 
+    /**
+     * 超级管理员、管理员、普通用户
+     */
     private String userType;
 
+    /**
+     * 注册IP
+     */
     private String regIp;
 
+    /**
+     * 最近登录IP
+     */
     private String lastLoginIp;
 
-    private Date lastLoginTime;
+    /**
+     * 最近登录时间
+     */
+    private LocalDateTime lastLoginTime;
 
+    /**
+     * 登录次数
+     */
     private Integer loginCount;
 
+    /**
+     * 用户备注
+     */
     private String remark;
 
+    /**
+     * 用户状态
+     */
     private Integer status;
 
-    private Date createTime;
+    /**
+     * 注册时间
+     */
+    private LocalDateTime createTime;
 
-    private Date updateTime;
+    /**
+     * 更新时间
+     */
+    private LocalDateTime updateTime;
 
+    @TableField(exist=false)
     private List<SysRole> roles;
 
     public List<SysRole> getRoles() {
@@ -108,19 +178,19 @@ public class SysUser {
         this.qq = qq;
     }
 
-    public Date getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 
-    public Byte getGender() {
+    public Integer getGender() {
         return gender;
     }
 
-    public void setGender(Byte gender) {
+    public void setGender(Integer gender) {
         this.gender = gender;
     }
 
@@ -156,11 +226,11 @@ public class SysUser {
         this.lastLoginIp = lastLoginIp;
     }
 
-    public Date getLastLoginTime() {
+    public LocalDateTime getLastLoginTime() {
         return lastLoginTime;
     }
 
-    public void setLastLoginTime(Date lastLoginTime) {
+    public void setLastLoginTime(LocalDateTime lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
     }
 
@@ -188,19 +258,49 @@ public class SysUser {
         this.status = status;
     }
 
-    public Date getCreateTime() {
+    public LocalDateTime getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
 
-    public Date getUpdateTime() {
+    public LocalDateTime getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
+    }
+
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
+
+    @Override
+    public String toString() {
+        return "SysUser{" +
+                "id=" + id +
+                ", username=" + username +
+                ", password=" + password +
+                ", nickname=" + nickname +
+                ", mobile=" + mobile +
+                ", email=" + email +
+                ", qq=" + qq +
+                ", birthday=" + birthday +
+                ", gender=" + gender +
+                ", avatar=" + avatar +
+                ", userType=" + userType +
+                ", regIp=" + regIp +
+                ", lastLoginIp=" + lastLoginIp +
+                ", lastLoginTime=" + lastLoginTime +
+                ", loginCount=" + loginCount +
+                ", remark=" + remark +
+                ", status=" + status +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                "}";
     }
 }

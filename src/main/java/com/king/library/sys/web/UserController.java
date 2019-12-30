@@ -1,34 +1,42 @@
 package com.king.library.sys.web;
 
 import com.alibaba.fastjson.JSONObject;
+import com.king.library.common.model.PageVo;
 import com.king.library.common.tools.CommonUtil;
+import com.king.library.sys.pojo.SysUser;
 import com.king.library.sys.service.SysUserService;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @author: duanyong
  * @description: 用户/角色/权限相关controller
  * @date: 2017/11/2 10:19
  */
-@RestController
+@Controller
 @RequestMapping("/user")
 public class UserController {
 	@Autowired
 	private SysUserService sysUserService;
-//
-//	/**
-//	 * 查询用户列表
-//	 */
+
+	/**
+	 * 查询用户列表
+	 */
 //	@RequiresPermissions("user:list")
-//	@GetMapping("/list")
-//	public JSONObject listUser(HttpServletRequest request) {
-//		return userService.listUser(CommonUtil.request2Json(request));
-//	}
+	@ResponseBody
+	@RequestMapping("datas")
+	public PageVo listUser(PageVo pageVo) {
+		List<SysUser> datas = sysUserService.list();
+		pageVo.setData(datas);
+		pageVo.setTotalCount(datas.size());
+		return pageVo;
+	}
 //
 //	@RequiresPermissions("user:add")
 //	@PostMapping("/addUser")

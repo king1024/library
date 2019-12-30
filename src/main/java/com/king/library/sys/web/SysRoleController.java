@@ -24,6 +24,8 @@ public class SysRoleController {
     @ResponseBody
     @RequestMapping("datas")
     public List<SysRole> findAllRoles(){
-        return sysRoleService.findAllRoles();
+
+        List<SysRole> roleList = sysRoleService.list();
+        return roleList;
     }
 }

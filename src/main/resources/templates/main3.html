@@ -70,7 +70,6 @@
         var tabs = mini.get("mainTabs");
         var tab = tabs.getTab(item.id);
         if (!tab) {
-            console.log(item.iconCls);
             tab = { name: item.id, title: item.text, url: item.url, iconCls: item.iconCls, showCloseButton: true };
             tab = tabs.addTab(tab);
         }

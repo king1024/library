@@ -1,62 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.king.library.sys.mapper.SysResourcesMapper">
+
+  <!-- 通用查询映射结果 -->
   <resultMap id="BaseResultMap" type="com.king.library.sys.pojo.SysResources">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="type" jdbcType="VARCHAR" property="type" />
-    <result column="url" jdbcType="VARCHAR" property="url" />
-    <result column="permission" jdbcType="VARCHAR" property="permission" />
-    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
-    <result column="sort" jdbcType="INTEGER" property="sort" />
-    <result column="external" jdbcType="BIT" property="external" />
-    <result column="available" jdbcType="BIT" property="available" />
-    <result column="icon" jdbcType="VARCHAR" property="icon" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <id column="id" property="id" />
+    <result column="name" property="name" />
+    <result column="type" property="type" />
+    <result column="url" property="url" />
+    <result column="permission" property="permission" />
+    <result column="parent_id" property="parentId" />
+    <result column="sort" property="sort" />
+    <result column="external" property="external" />
+    <result column="available" property="available" />
+    <result column="icon" property="icon" />
+    <result column="create_time" property="createTime" />
+    <result column="update_time" property="updateTime" />
   </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from sys_resources
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="com.king.library.sys.pojo.SysResources">
-    insert into sys_resources (id, name, type, 
-      url, permission, parent_id, 
-      sort, external, available, 
-      icon, create_time, update_time
-      )
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
-      #{url,jdbcType=VARCHAR}, #{permission,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}, 
-      #{sort,jdbcType=INTEGER}, #{external,jdbcType=BIT}, #{available,jdbcType=BIT}, 
-      #{icon,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
-      )
-  </insert>
-  <update id="updateByPrimaryKey" parameterType="com.king.library.sys.pojo.SysResources">
-    update sys_resources
-    set name = #{name,jdbcType=VARCHAR},
-      type = #{type,jdbcType=VARCHAR},
-      url = #{url,jdbcType=VARCHAR},
-      permission = #{permission,jdbcType=VARCHAR},
-      parent_id = #{parentId,jdbcType=BIGINT},
-      sort = #{sort,jdbcType=INTEGER},
-      external = #{external,jdbcType=BIT},
-      available = #{available,jdbcType=BIT},
-      icon = #{icon,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select id, name, type, url, permission, parent_id, sort, external, available, icon, 
-    create_time, update_time
-    from sys_resources
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select id, name, type, url, permission, parent_id, sort, external, available, icon, 
-    create_time, update_time
-    from sys_resources
-  </select>
+
+  <!-- 通用查询结果列 -->
+  <sql id="Base_Column_List">
+        id, name, type, url, permission, parent_id, sort, external, available, icon, create_time, update_time
+    </sql>
   <select id="selectResByRoleId" resultMap="BaseResultMap" parameterType="long">
       select t1.id, t1.name, t1.type, t1.url, t1.permission, t1.parent_id, t1.sort, t1.external,
       t1.available, t1.icon

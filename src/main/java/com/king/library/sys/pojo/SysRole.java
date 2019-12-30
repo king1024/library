@@ -1,21 +1,48 @@
 package com.king.library.sys.pojo;
 
-import java.util.Date;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.baomidou.mybatisplus.annotation.TableId;
+import java.time.LocalDateTime;
+import java.io.Serializable;
 import java.util.List;
 
-public class SysRole {
+/**
+ * <p>
+ *
+ * </p>
+ *
+ * @author duanyong
+ * @since 2019-12-27
+ */
+public class SysRole extends Model<SysRole> {
+
+    private static final long serialVersionUID=1L;
+
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
+    /**
+     * 角色名
+     */
     private String name;
 
     private String description;
 
     private Boolean available;
 
-    private Date createTime;
+    /**
+     * 添加时间
+     */
+    private LocalDateTime createTime;
 
-    private Date updateTime;
+    /**
+     * 更新时间
+     */
+    private LocalDateTime updateTime;
 
+    @TableField(exist=false)
     private List<SysResources> sysResources;
 
     public List<SysResources> getSysResources() {
@@ -58,19 +85,36 @@ public class SysRole {
         this.available = available;
     }
 
-    public Date getCreateTime() {
+    public LocalDateTime getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
 
-    public Date getUpdateTime() {
+    public LocalDateTime getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
+    }
+
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
+
+    @Override
+    public String toString() {
+        return "SysRole{" +
+                "id=" + id +
+                ", name=" + name +
+                ", description=" + description +
+                ", available=" + available +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                "}";
     }
 }

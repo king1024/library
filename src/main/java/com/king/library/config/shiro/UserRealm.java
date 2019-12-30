@@ -36,7 +36,7 @@ public class UserRealm extends AuthorizingRealm {
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
 		SysUser user=(SysUser)principals.getPrimaryPrincipal();
 		if("root".equals(user.getUserType())){
-			List<SysResources> allResources = sysResourcesService.findAllResources();
+			List<SysResources> allResources = sysResourcesService.list();
 			for (SysResources resources : allResources) {
 				authorizationInfo.addStringPermission(resources.getPermission());
 			}

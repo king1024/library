@@ -6,7 +6,8 @@ package com.king.library.common.constants;
  * @desc:
  */
 public enum StatusEnum {
-
+    SUCCESS(200,"成功"),
+    ERROR(500,"失败"),
     NORMAL(1, "正常"),
     DISABLE(0, "禁用"),;
     private Integer code;

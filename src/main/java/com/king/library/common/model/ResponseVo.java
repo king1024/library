@@ -21,6 +21,10 @@ public class ResponseVo <T> {
         this.message = message;
     }
 
+    public ResponseVo(Integer status) {
+        this.status = status;
+    }
+
     public ResponseVo(T data) {
         this.status=200;
         this.data = data;

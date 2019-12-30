@@ -1,14 +1,15 @@
 package com.king.library.sys.service;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.king.library.common.model.MenuNode;
 import com.king.library.common.tools.MenuTree;
 import com.king.library.sys.mapper.SysMenuMapper;
 import com.king.library.sys.pojo.SysMenu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.*;
-
 /**
  * @date: 2019/12/12 10:13
  * @author: duanyong

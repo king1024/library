@@ -1,28 +1,24 @@
 package com.king.library.sys.service;
 
-import com.king.library.sys.mapper.SysResourcesMapper;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.king.library.common.constants.StatusEnum;
+import com.king.library.common.model.ResponseVo;
 import com.king.library.sys.pojo.SysResources;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
- * @date: 2019/12/13 17:27
- * @author: duanyong
- * @desc:
+ * <p>
+ *  服务类
+ * </p>
+ *
+ * @author duanyong
+ * @since 2019-12-27
  */
-@Service
-public class SysResourcesService {
+public interface SysResourcesService extends IService<SysResources> {
+    public List<SysResources> findAllResourcesByUserId(Integer userId);
 
-    @Autowired
-    private SysResourcesMapper sysResourcesMapper;
+    public ResponseVo saveResource(SysResources res);
 
-    public List<SysResources> findAllResources(){
-        return sysResourcesMapper.selectAll();
-    }
-
-    public List<SysResources> findAllResourcesByUserId(Integer userId){
-        return sysResourcesMapper.selectResourcesByUserId(userId);
-    }
+    public ResponseVo updateRes(List<SysResources> resList) ;
 }

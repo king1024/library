@@ -1,18 +1,19 @@
 package com.king.library.sys.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.king.library.sys.pojo.SysUser;
+
 import java.util.List;
 
-public interface SysUserMapper {
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(SysUser record);
-
-    SysUser selectByPrimaryKey(Integer id);
-
-    List<SysUser> selectAll();
-
-    int updateByPrimaryKey(SysUser record);
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author duanyong
+ * @since 2019-12-27
+ */
+public interface SysUserMapper extends BaseMapper<SysUser> {
 
     List<SysUser> getUserByName(String username);
 
