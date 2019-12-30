@@ -49,7 +49,7 @@ public class SysResourcesServiceImpl extends ServiceImpl<SysResourcesMapper, Sys
     @Override
     public List<TreeNode> getTreeData(int userId) {
         List<SysResources> resources = this.baseMapper.selectList(null);
-        List<SysResources> userResources = this.baseMapper.selectResByRoleId(new Long(userId));
+        List<SysResources> userResources = this.baseMapper.selectResByRoleId(new Long(userId),false);
         List<TreeNode> treeNodes=new ArrayList<>();
         for(SysResources res:resources){
             TreeNode node=new TreeNode(res.getId()+"",res.getName(),res.getParentId()+"",false);

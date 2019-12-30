@@ -14,7 +14,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface SysResourcesMapper extends BaseMapper<SysResources> {
 
-    List<SysResources> selectResByRoleId(Long id);
+    List<SysResources> selectResByRoleId(Long id,boolean available);
 
     List<SysResources> selectResourcesByUserId(Integer userId);
 }

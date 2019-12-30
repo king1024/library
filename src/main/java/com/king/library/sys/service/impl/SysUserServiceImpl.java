@@ -45,7 +45,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             user=users.get(0);
             List<SysRole> roles=sysRoleMapper.selectRolesByUserId(user.getId());
             for(SysRole role:roles){
-                List<SysResources> resources=sysResourcesMapper.selectResByRoleId(role.getId());
+                List<SysResources> resources=sysResourcesMapper.selectResByRoleId(role.getId(),true);
                 role.setSysResources(resources);
             }
             user.setRoles(roles);
