@@ -34,13 +34,13 @@
         <div field="id" width="120" headerAlign="center">id</div>
         <div field="name" width="120" headerAlign="center" >资源名称
             <input property="editor" class="mini-textbox" style="width:100%;"/>
-            <input name="filterName" property="filter" class="mini-textbox" style="width:100%;"
+            <input id="name" name="filterName" property="filter" class="mini-textbox" style="width:100%;"
                    onvaluechanged="onFilterChanged" showClose="true" oncloseclick="oncloseclick"/>
         </div>
         <div field="type" width="120" headerAlign="center" type="comboboxcolumn">资源类型
             <input property="editor" class="mini-combobox" style="width:100%;"
                    data="[{'id':'menu','text':'菜单'},{'id':'button','text':'按钮'}]"/>
-            <input name="filterName" property="filter" class="mini-combobox" style="width:100%;"
+            <input id="type" name="filterName" property="filter" class="mini-combobox" style="width:100%;"
                    onvaluechanged="onFilterChanged" showClose="true" oncloseclick="oncloseclick"
                    data="[{'id':'menu','text':'菜单'},{'id':'button','text':'按钮'}]" allowInput="true"
             />
@@ -91,16 +91,5 @@
     }
     // 以管理员身份的操作命令（大概就是这个意思，在开始菜单里找，8和10开始菜单右键），输入netsh winsock reset，回车确定，重启电脑
 
-
-    function onFilterChanged() {
-        var namebox = mini.get("filterName");
-
-        var name = namebox.getValue().toLowerCase();
-        var age = parseInt(agebox.getValue().toLowerCase());
-        var ageFilter = agebox.getFilterValue().toLowerCase();
-
-        grid.load({ key: name, age: age, ageFilter: ageFilter });
-
-    }
 </script>
 </html>

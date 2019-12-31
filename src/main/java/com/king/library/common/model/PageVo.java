@@ -30,6 +30,19 @@ public class PageVo {
      */
     private long totalCount;
 
+    /**
+     * 前端过滤字段
+     */
+    private String filterStr;
+
+    public String getFilterStr() {
+        return filterStr;
+    }
+
+    public void setFilterStr(String filterStr) {
+        this.filterStr = filterStr;
+    }
+
     public Map getParams() {
         return params;
     }
