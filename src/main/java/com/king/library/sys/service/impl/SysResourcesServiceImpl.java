@@ -13,6 +13,7 @@ import com.king.library.common.tools.StringTools;
 import com.king.library.sys.mapper.SysResourcesMapper;
 import com.king.library.sys.pojo.SysResources;
 import com.king.library.sys.service.SysResourcesService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -29,6 +30,8 @@ import java.util.List;
 @Service
 public class SysResourcesServiceImpl extends ServiceImpl<SysResourcesMapper, SysResources> implements SysResourcesService {
 
+    @Autowired
+    private SysResourcesMapper sysResourcesMapper;
 
     @Override
     public List<SysResources> findAllResourcesByUserId(Integer userId){
@@ -79,5 +82,11 @@ public class SysResourcesServiceImpl extends ServiceImpl<SysResourcesMapper, Sys
         pageVo.setData(datas.getRecords());
         pageVo.setTotal(datas.getTotal());
         return pageVo;
+    }
+
+    @Override
+    public void batchForbid(List<String> list) {
+//        sysResourcesMapper.
+        this.baseMapper.batchForbid(list);
     }
 }

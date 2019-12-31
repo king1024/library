@@ -11,6 +11,7 @@ import com.king.library.sys.pojo.SysResources;
 import com.king.library.sys.service.SysResourcesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -53,5 +54,31 @@ public class ResourcesController {
     @RequestMapping("update")
     public ResponseVo updateRes(@RequestBody List<SysResources> resList){
         return sysResourcesService.updateRes(resList);
+    }
+
+    /**
+     * 禁用
+     * @param resList
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("batchForbid")
+    @Transactional
+    public ResponseVo batchForbid(@RequestBody List<String> resList){
+        ResponseVo vo=new ResponseVo(200);
+        sysResourcesService.batchForbid(resList);
+        return vo;
+    }
+
+    @ResponseBody
+    @RequestMapping("remove")
+    @Transactional
+    public ResponseVo removeRes(@RequestBody List<String> resList){
+        ResponseVo vo=new ResponseVo(200);
+        if(!sysResourcesService.removeByIds(resList)){
+            vo.setStatus(500);
+            vo.setMessage("删除失败");
+        }
+        return vo;
     }
 }

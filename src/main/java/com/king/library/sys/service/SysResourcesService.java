@@ -40,4 +40,10 @@ public interface SysResourcesService extends IService<SysResources> {
      * @return
      */
     PageVo findAllResForPage(PageVo pageVo);
+
+    /**
+     * 逻辑删除
+     * @param resList
+     */
+    void batchForbid(List<String> resList);
 }

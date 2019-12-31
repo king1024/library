@@ -41,4 +41,12 @@
       INNER join sys_role t4 on t4.id=t2.role_id
       WHERE t1.available=1 and t4.available=1 AND t3.user_id=#{id}
     </select>
+
+    <update id="batchForbid">
+        update sys_resources set available = 0
+        where id in
+        <foreach collection="list" item="rid" separator="," open="(" close=")">
+            #{rid}
+        </foreach>
+    </update>
 </mapper>

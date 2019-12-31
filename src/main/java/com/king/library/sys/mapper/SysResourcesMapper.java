@@ -17,4 +17,9 @@ public interface SysResourcesMapper extends BaseMapper<SysResources> {
     List<SysResources> selectResByRoleId(Long id,boolean available);
 
     List<SysResources> selectResourcesByUserId(Integer userId);
+    /**
+     * 禁用
+     * @param resList
+     */
+    void batchForbid(List<String> resList);
 }

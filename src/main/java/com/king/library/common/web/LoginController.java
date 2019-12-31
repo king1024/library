@@ -59,6 +59,7 @@ public class LoginController {
 			List<SysRole> roles = user.getRoles();
 			for (SysRole role:roles) {
 				for(SysResources resources:role.getSysResources()){
+//					resources.setName(resources.getName()+"--"+resources.getId());
 					if("menu".equals(resources.getType())){
 						menuList.add(resources);
 					}
