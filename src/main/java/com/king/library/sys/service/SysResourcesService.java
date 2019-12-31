@@ -1,7 +1,10 @@
 package com.king.library.sys.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.king.library.common.constants.StatusEnum;
+import com.king.library.common.model.PageVo;
 import com.king.library.common.model.ResponseVo;
 import com.king.library.common.model.TreeNode;
 import com.king.library.sys.pojo.SysResources;
@@ -29,4 +32,12 @@ public interface SysResourcesService extends IService<SysResources> {
      * @return
      */
     List<TreeNode> getTreeData(int userId);
+
+    /**
+     * 分页查询
+     * @param page
+     * @param query
+     * @return
+     */
+    PageVo findAllResForPage(PageVo pageVo);
 }

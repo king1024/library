@@ -2,6 +2,7 @@ package com.king.library.sys.web;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.king.library.common.model.PageVo;
 import com.king.library.common.model.ResponseVo;
 import com.king.library.common.model.TreeNode;
@@ -30,16 +31,8 @@ public class ResourcesController {
 
     @ResponseBody
     @RequestMapping("datas")
-    public PageVo findAllRes(PageVo pageVo){
-        SysResources resources=null;
-        if(StringTools.isNotEmpty(pageVo.getFilterStr())){
-            resources = JSON.parseObject(pageVo.getFilterStr(), SysResources.class);
-        }
-
-        QueryWrapper<SysResources> query=new QueryWrapper<SysResources>(resources);
-        List<SysResources> allResources = sysResourcesService.list(query);
-        pageVo.setData(allResources);
-        pageVo.setTotalCount(allResources.size());
+    public PageVo findAllResForPage(PageVo pageVo){
+        pageVo = sysResourcesService.findAllResForPage(pageVo);
         return pageVo;
     }
 

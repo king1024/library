@@ -40,7 +40,7 @@ public class UserController {
 	public PageVo listUser(PageVo pageVo) {
 		List<SysUser> datas = sysUserService.list();
 		pageVo.setData(datas);
-		pageVo.setTotalCount(datas.size());
+		pageVo.setTotal(datas.size());
 		return pageVo;
 	}
 

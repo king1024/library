@@ -28,7 +28,15 @@ public class PageVo {
     /**
      * 总共多少条
      */
-    private long totalCount;
+    private long total;
+
+    public long getTotal() {
+        return total;
+    }
+
+    public void setTotal(long total) {
+        this.total = total;
+    }
 
     /**
      * 前端过滤字段
@@ -75,11 +83,4 @@ public class PageVo {
         this.pageSize = pageSize;
     }
 
-    public long getTotalCount() {
-        return totalCount;
-    }
-
-    public void setTotalCount(long totalCount) {
-        this.totalCount = totalCount;
-    }
 }
