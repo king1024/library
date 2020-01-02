@@ -9,6 +9,7 @@ import com.king.library.common.constants.StatusEnum;
 import com.king.library.common.model.PageVo;
 import com.king.library.common.model.ResponseVo;
 import com.king.library.common.model.TreeNode;
+import com.king.library.common.tools.CommonUtil;
 import com.king.library.common.tools.StringTools;
 import com.king.library.sys.mapper.SysResourcesMapper;
 import com.king.library.sys.pojo.SysResources;
@@ -72,11 +73,7 @@ public class SysResourcesServiceImpl extends ServiceImpl<SysResourcesMapper, Sys
 
     @Override
     public PageVo findAllResForPage(PageVo pageVo) {
-        SysResources resources=null;
-        if(StringTools.isNotEmpty(pageVo.getFilterStr())){
-            resources = JSON.parseObject(pageVo.getFilterStr(), SysResources.class);
-        }
-        QueryWrapper<SysResources> query=new QueryWrapper<SysResources>(resources);
+        QueryWrapper<SysResources> query= CommonUtil.getQueryWrapperByFilterStr(pageVo.getFilterStr(), SysResources.class);
         query.orderByDesc("sort");
         Page<SysResources> page = new Page<>(pageVo.getPageIndex()+1,pageVo.getPageSize());
         IPage<SysResources> datas = this.baseMapper.selectPage(page, query);

@@ -1,8 +1,15 @@
 package com.king.library.sys.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.king.library.common.constants.StatusEnum;
+import com.king.library.common.model.PageVo;
 import com.king.library.common.model.ResponseVo;
+import com.king.library.common.tools.CommonUtil;
+import com.king.library.common.tools.StringTools;
 import com.king.library.sys.mapper.SysResourcesMapper;
 import com.king.library.sys.mapper.SysRoleMapper;
 import com.king.library.sys.mapper.SysUserMapper;
@@ -62,5 +69,16 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             this.baseMapper.updateById(user);
         }
         return new ResponseVo(StatusEnum.SUCCESS.getCode());
+    }
+
+    @Override
+    public PageVo listUser(PageVo pageVo) {
+        QueryWrapper<SysUser> query = CommonUtil.getQueryWrapperByFilterStr(pageVo.getFilterStr(), SysUser.class);
+        query.orderByDesc("create_time");
+        Page<SysUser> page = new Page<>(pageVo.getPageIndex()+1,pageVo.getPageSize());
+        IPage<SysUser> datas = this.baseMapper.selectPage(page, query);
+        pageVo.setData(datas.getRecords());
+        pageVo.setTotal(datas.getTotal());
+        return pageVo;
     }
 }

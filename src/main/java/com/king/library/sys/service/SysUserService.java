@@ -1,6 +1,7 @@
 package com.king.library.sys.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.king.library.common.model.PageVo;
 import com.king.library.common.model.ResponseVo;
 import com.king.library.sys.pojo.SysUser;
 
@@ -28,4 +29,6 @@ public interface SysUserService extends IService<SysUser> {
      * @return
      */
     ResponseVo batchUpdate(List<SysUser> sysUserList);
+
+    PageVo listUser(PageVo pageVo);
 }

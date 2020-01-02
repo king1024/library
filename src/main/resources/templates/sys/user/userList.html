@@ -11,8 +11,8 @@
     <table style="width:100%;">
         <tr>
             <td style="width:100%;">
-                <span>资源名称：</span><input type="text" id="key"  />
-                <input type="button" value="查找" onclick="search()"/>
+                <!--<span>资源名称：</span><input type="text" id="key"  />
+                <input type="button" value="查找" onclick="search()"/>-->
             </td>
             <td style="white-space:nowrap;">
                 <a class="mini-button" iconCls="fa-plus" onclick="add()">增加</a>
@@ -27,7 +27,7 @@
      url="/user/datas"
      idField="id" allowResize="true" multiSelect="true"
      sizeList="[20,30,50,100]" pageSize="20" allowCellEdit="true" allowCellSelect="true"
-     showHeader="true" title="用户列表" >
+     showHeader="true" title="用户列表" showFilterRow="true">
     <div property="columns">
         <div type="checkcolumn" ></div>
         <div type="indexcolumn" ></div>
@@ -35,10 +35,14 @@
         <div field="id" width="120" headerAlign="center">id</div>
         <div field="username" width="120" headerAlign="center" >用户编号
             <input property="editor" class="mini-textbox" style="width:100%;"/>
+            <input id="username" name="filterName" property="filter" class="mini-textbox" style="width:100%;"
+                   onvaluechanged="onFilterChanged" showClose="true" oncloseclick="oncloseclick"/>
         </div>
         <div field="password" width="120" headerAlign="center" >登录密码</div>
         <div field="nickname" width="120" headerAlign="center" >昵称
             <input property="editor" class="mini-textbox" style="width:100%;"/>
+            <input id="nickname" name="filterName" property="filter" class="mini-textbox" style="width:100%;"
+                   onvaluechanged="onFilterChanged" showClose="true" oncloseclick="oncloseclick"/>
         </div>
         <div field="mobile" width="120" headerAlign="center" >手机号码</div>
         <div field="email" width="120" headerAlign="center" >电子邮箱 </div>
@@ -52,6 +56,9 @@
         <div field="status" width="120" headerAlign="center" type="comboboxcolumn">用户状态
             <input property="editor" class="mini-combobox" style="width:100%;"
                    data="[{'id':'1','text':'是'},{'id':'0','text':'否'}]"/>
+            <input id="status" name="filterName" property="filter" class="mini-combobox" style="width:100%;"
+                   onvaluechanged="onFilterChanged" showClose="true" oncloseclick="oncloseclick"
+                   data="[{'id':'1','text':'是'},{'id':'0','text':'否'}]" allowInput="true" />
         </div>
     </div>
 </div>

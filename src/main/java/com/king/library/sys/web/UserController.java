@@ -38,10 +38,7 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping("datas")
 	public PageVo listUser(PageVo pageVo) {
-		List<SysUser> datas = sysUserService.list();
-		pageVo.setData(datas);
-		pageVo.setTotal(datas.size());
-		return pageVo;
+		return sysUserService.listUser(pageVo);
 	}
 
 	@ResponseBody

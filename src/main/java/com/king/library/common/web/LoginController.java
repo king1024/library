@@ -53,9 +53,9 @@ public class LoginController {
 		try{
 			currentUser.login(token);
 			SysUser user = (SysUser)currentUser.getPrincipal();
-			MenuTree tree=new MenuTree();
-			List<MenuNode> menu =tree.buildSysMenuByResources(user.getResourcesList());
-			model.addAttribute("menu",menu);
+//			MenuTree tree=new MenuTree();
+//			List<MenuNode> menu =tree.buildSysMenuByResources(user.getResourcesList());
+//			model.addAttribute("menu",menu);
 			model.addAttribute("roles",user.getRoles());
 			return "main3";
 		} catch (UnknownAccountException e) {
@@ -88,5 +88,14 @@ public class LoginController {
 		} catch (Exception e) {
 		}
 		return "login";
+	}
+
+	@ResponseBody
+	@RequestMapping("/getMenu")
+	public List<MenuNode> getMenu(){
+		Subject currentUser = SecurityUtils.getSubject();
+		SysUser user = (SysUser)currentUser.getPrincipal();
+		MenuTree tree=new MenuTree();
+		return tree.buildSysMenuByResources(user.getResourcesList());
 	}
 }
