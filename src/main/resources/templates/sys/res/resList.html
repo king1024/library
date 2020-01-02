@@ -60,10 +60,10 @@
         <div field="external" width="120" headerAlign="center" renderer="onIFRenderer">是否外部链接</div>
         <div field="available" width="120" headerAlign="center" type="comboboxcolumn">是否可用
             <input property="editor" class="mini-combobox" style="width:100%;"
-                   data="[{'id':'true','text':'是'},{'id':'false','text':'否'}]"/>
+                   data="[{'id':'1','text':'是'},{'id':'0','text':'否'}]"/>
             <input id="available" name="filterName" property="filter" class="mini-combobox" style="width:100%;"
                    onvaluechanged="onFilterChanged" showClose="true" oncloseclick="oncloseclick"
-                   data="[{'id':'true','text':'是'},{'id':'false','text':'否'}]" allowInput="true" />
+                   data="[{'id':'1','text':'是'},{'id':'0','text':'否'}]" allowInput="true" />
         </div>
         <div field="icon" width="120" headerAlign="center" >资源图标
             <input property="editor" class="mini-textbox" style="width:100%;"/>
@@ -77,6 +77,23 @@
     mini.parse();
     var grid=mini.get("datagrid1");
     grid.load();
+
+    function add() {
+        mini.open({
+            targetWindow: window,
+            url: "/page/sys/res/resDetail",
+            title: "新增资源", width: 600, height: 400,
+            onload: function () {
+                var iframe = this.getIFrameEl();
+                var data = { action: "new" };
+                iframe.contentWindow.SetData(data);
+            },
+            ondestroy: function (action) {
+                grid.reload();
+            }
+        });
+    }
+
     function save(){
         var data = grid.getChanges();
         $.ajax({

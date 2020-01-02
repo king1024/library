@@ -1,6 +1,8 @@
 package com.king.library.sys.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.king.library.common.constants.StatusEnum;
+import com.king.library.common.model.ResponseVo;
 import com.king.library.sys.mapper.SysRoleMapper;
 import com.king.library.sys.pojo.SysRole;
 import com.king.library.sys.service.SysRoleService;
@@ -26,5 +28,13 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     @Override
     public List<SysRole> findAllRoles(){
         return this.baseMapper.selectList(null);
+    }
+
+    @Override
+    public ResponseVo batchUpdate(List<SysRole> sysUserList) {
+        for(SysRole role:sysUserList){
+            this.baseMapper.updateById(role);
+        }
+        return new ResponseVo(StatusEnum.SUCCESS.getCode());
     }
 }

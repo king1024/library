@@ -54,4 +54,31 @@ public class SysRoleController {
         List<String> resIds=obj==null?null:(List<String>)obj;
         return sysRoleResourcesService.updateRoleRes(roleId,resIds);
     }
+
+
+    @ResponseBody
+    @RequestMapping("save")
+    public ResponseVo save(@RequestBody SysRole sysRole) {
+        sysRole.setAvailable(true);
+        ResponseVo vo=new ResponseVo(200);
+        sysRoleService.save(sysRole);
+        return vo;
+    }
+
+    @ResponseBody
+    @RequestMapping("update")
+    public ResponseVo update(@RequestBody List<SysRole> sysUserList) {
+        return sysRoleService.batchUpdate(sysUserList);
+    }
+
+    @ResponseBody
+    @RequestMapping("remove")
+    public ResponseVo remove(@RequestBody List<String> resList) {
+        ResponseVo vo=new ResponseVo(200);
+        if(!sysRoleService.removeByIds(resList)){
+            vo.setStatus(500);
+            vo.setMessage("删除失败");
+        }
+        return vo;
+    }
 }

@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @date: 2019/12/26 20:02
@@ -45,8 +47,19 @@ public class ResourcesController {
     }
 
     @ResponseBody
+    @RequestMapping("selectData")
+    public List<SysResources> selectData(){
+        SysResources res=new SysResources();
+        res.setAvailable(1);
+        QueryWrapper<SysResources> query=new QueryWrapper<SysResources>(res);
+        query.orderByDesc("sort");
+        List<SysResources> datas = sysResourcesService.list(query);
+        return datas;
+    }
+
+    @ResponseBody
     @RequestMapping("save")
-    public ResponseVo updateResource(SysResources res){
+    public ResponseVo save(@RequestBody SysResources res) {
         return sysResourcesService.saveResource(res);
     }
 

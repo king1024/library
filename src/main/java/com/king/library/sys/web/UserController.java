@@ -57,4 +57,32 @@ public class UserController {
 		return sysUserRoleService.updateUserRole(userId,roleIds);
 	}
 
+	@ResponseBody
+	@RequestMapping("save")
+	public ResponseVo save(@RequestBody SysUser sysUser) {
+		if(StringTools.isEmpty(sysUser.getPassword())){
+			sysUser.setPassword("123456");
+		}
+		sysUser.setStatus(1);
+		ResponseVo vo=new ResponseVo(200);
+		sysUserService.save(sysUser);
+		return vo;
+	}
+
+	@ResponseBody
+	@RequestMapping("update")
+	public ResponseVo update(@RequestBody List<SysUser> sysUserList) {
+		return sysUserService.batchUpdate(sysUserList);
+	}
+
+	@ResponseBody
+	@RequestMapping("remove")
+	public ResponseVo remove(@RequestBody List<String> resList) {
+		ResponseVo vo=new ResponseVo(200);
+		if(!sysUserService.removeByIds(resList)){
+			vo.setStatus(500);
+			vo.setMessage("删除失败");
+		}
+		return vo;
+	}
 }

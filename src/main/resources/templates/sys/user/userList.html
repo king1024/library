@@ -51,7 +51,7 @@
 
         <div field="status" width="120" headerAlign="center" type="comboboxcolumn">用户状态
             <input property="editor" class="mini-combobox" style="width:100%;"
-                   data="[{'id':'true','text':'是'},{'id':'false','text':'否'}]"/>
+                   data="[{'id':'1','text':'是'},{'id':'0','text':'否'}]"/>
         </div>
     </div>
 </div>
@@ -60,10 +60,52 @@
     mini.parse();
     var grid=mini.get("datagrid1");
     grid.load();
+
+    function remove(){
+        var data = grid.getSelecteds();
+        if(data.length==0){
+            mini.alert("没有东西","友情提示");
+        }
+        var ids=new Array();
+        for(var item of data){
+            ids.push(item.id);
+        }
+        $.ajax({
+            url: "/user/remove",
+            data: JSON.stringify(ids),
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (text) {
+                if (text.status==200){
+                    grid.reload();
+                } else {
+                    mini.alert("删除失败","友情提示");
+                }
+            }
+        });
+    }
+
+    function add() {
+        mini.open({
+            targetWindow: window,
+            url: "/page/sys/user/userDetail",
+            title: "新增员工", width: 600, height: 250,
+            onload: function () {
+                var iframe = this.getIFrameEl();
+                var data = { action: "new" };
+                iframe.contentWindow.SetData(data);
+            },
+            ondestroy: function (action) {
+
+                grid.reload();
+            }
+        });
+    }
     function save(){
         var data = grid.getChanges();
         $.ajax({
-            url: "/resources/update",
+            url: "/user/update",
             data: JSON.stringify(data),
             type: "POST",
             contentType: "application/json; charset=utf-8",

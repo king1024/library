@@ -8,13 +8,22 @@
 <body>
 
 <div style="padding-bottom:5px;">
-    <span>角色名称：</span><input type="text" id="key"  />
-    <input type="button" value="查找" onclick="search()"/>
-
+    <table style="width:100%;">
+        <tr>
+            <td style="width:100%;">
+                <span>角色名称：</span><input type="text" id="key"  />
+                <input type="button" value="查找" onclick="search()"/>
+            </td>
+            <td style="white-space:nowrap;">
+                <a class="mini-button" iconCls="fa-plus" onclick="add()">增加</a>
+                <a class="mini-button" iconCls="fa-remove" onclick="remove()">删除</a>
+                <a class="mini-button" iconCls="fa-save" onclick="save()">保存</a>
+            </td>
+        </tr>
+    </table>
 </div>
-<!--url="/sysRole/datas"-->
 <div id="datagrid1" class="mini-datagrid" style="width:100%;height:550px;"
-
+     url="/sysRole/datas"
      idField="id" allowResize="true"
      sizeList="[20,30,50,100]" pageSize="20"
      showHeader="true" title="角色列表" >
@@ -33,16 +42,7 @@
 <script>
     mini.parse();
     var grid=mini.get("datagrid1");
-    $(function(){
-        $.ajax({
-            url:"/sysRole/datas",
-            type:"POST",
-            dataType:"json",
-            success: function (text) {
-                grid.setData(text);
-            }
-        });
-    });
+    grid.load();
     function onOptionRenderer(e){
         var record=e.record;
         var html='<i class="fa fa-font-awesome" onclick="updateRes(\''+record.id+'\')"></i>'
@@ -61,6 +61,61 @@
             },
             ondestroy: function (action) {
                 // grid.reload();
+            }
+        });
+    }
+
+    function remove(){
+        var data = grid.getSelecteds();
+        if(data.length==0){
+            mini.alert("没有东西","友情提示");
+        }
+        var ids=new Array();
+        for(var item of data){
+            ids.push(item.id);
+        }
+        $.ajax({
+            url: "/sysRole/remove",
+            data: JSON.stringify(ids),
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (text) {
+                if (text.status==200){
+                    grid.reload();
+                } else {
+                    mini.alert("删除失败","友情提示");
+                }
+            }
+        });
+    }
+
+    function add() {
+        mini.open({
+            targetWindow: window,
+            url: "/page/sys/role/roleDetail",
+            title: "新增角色", width: 600, height: 250,
+            onload: function () {
+                var iframe = this.getIFrameEl();
+                var data = { action: "new" };
+                iframe.contentWindow.SetData(data);
+            },
+            ondestroy: function (action) {
+
+                grid.reload();
+            }
+        });
+    }
+    function save(){
+        var data = grid.getChanges();
+        $.ajax({
+            url: "/sysRole/update",
+            data: JSON.stringify(data),
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (text) {
+                grid.reload();
             }
         });
     }

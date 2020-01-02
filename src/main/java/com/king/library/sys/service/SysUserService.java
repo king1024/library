@@ -21,4 +21,11 @@ public interface SysUserService extends IService<SysUser> {
      * @return
      */
     public SysUser getUserByName(String username);
+
+    /**
+     * 批量修改用户
+     * @param sysUserList
+     * @return
+     */
+    ResponseVo batchUpdate(List<SysUser> sysUserList);
 }

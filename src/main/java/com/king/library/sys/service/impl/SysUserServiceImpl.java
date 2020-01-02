@@ -1,6 +1,7 @@
 package com.king.library.sys.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.king.library.common.constants.StatusEnum;
 import com.king.library.common.model.ResponseVo;
 import com.king.library.sys.mapper.SysResourcesMapper;
 import com.king.library.sys.mapper.SysRoleMapper;
@@ -51,5 +52,13 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             user.setRoles(roles);
         }
         return user;
+    }
+
+    @Override
+    public ResponseVo batchUpdate(List<SysUser> sysUserList) {
+        for(SysUser user:sysUserList){
+            this.baseMapper.updateById(user);
+        }
+        return new ResponseVo(StatusEnum.SUCCESS.getCode());
     }
 }

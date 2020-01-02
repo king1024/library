@@ -36,9 +36,9 @@ public class SysResources extends Model<SysResources> {
     /**
      * 是否外部链接
      */
-    private Boolean external;
+    private Integer external;
 
-    private Boolean available;
+    private Integer available;
 
     /**
      * 菜单图标
@@ -112,19 +112,19 @@ public class SysResources extends Model<SysResources> {
         this.sort = sort;
     }
 
-    public Boolean getExternal() {
+    public Integer getExternal() {
         return external;
     }
 
-    public void setExternal(Boolean external) {
+    public void setExternal(Integer external) {
         this.external = external;
     }
 
-    public Boolean getAvailable() {
+    public Integer getAvailable() {
         return available;
     }
 
-    public void setAvailable(Boolean available) {
+    public void setAvailable(Integer available) {
         this.available = available;
     }
 

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.0rg">
+<head th:include="common.html"></head>
+<head>
+    <meta charset="UTF-8">
+    <title>用户新增</title>
+    <style type="text/css">
+        html, body
+        {
+            padding:0;
+            margin:0;
+            border:0;
+            height:100%;
+            overflow:hidden;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" method="post" style="margin-top: 30px;">
+        <input name="id" class="mini-hidden" />
+        <fieldset style="border:solid 1px #aaa;padding:3px;">
+            <legend >基本信息</legend>
+            <div style="padding:5px;">
+                <table>
+                    <tr>
+                        <td style="width:80px;">资源名称：</td>
+                        <td style="width:150px;">
+                            <input name="name" class="mini-textbox" required="true"  emptyText="请输入资源名称"/>
+                        </td>
+                        <td style="width:80px;">资源类型：</td>
+                        <td style="width:150px;">
+                            <select name="type" class="mini-radiobuttonlist">
+                                <option value="menu">菜单</option>
+                                <option value="button">按钮</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >链接地址：</td>
+                        <td >
+                            <input name="url" class="mini-textbox" required="true"/>
+                        </td>
+                        <td >上级节点：</td>
+                        <td >
+                            <input name="parentId" class="mini-treeselect" url="/resources/selectData"
+                                   valueField="id" textField="name" parentField="parentId"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td >是否外连接：</td>
+                        <td >
+                            <select name="external" class="mini-radiobuttonlist">
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </td>
+                        <td >资源图标：</td>
+                        <td >
+                            <input name="icon" class="mini-textbox" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </fieldset>
+        <div style="text-align:center;padding:10px;">
+            <a class="mini-button" onclick="onOk" style="width:60px;margin-right:20px;">保存</a>
+            <a class="mini-button" onclick="onCancel" style="width:60px;">取消</a>
+        </div>
+    </form>
+<script type="text/javascript">
+    mini.parse();
+    var form = new mini.Form("form1");
+
+    function SaveData() {
+        var data = form.getData();      //获取表单多个控件的数据
+        var json = mini.encode(data);   //序列化成JSON
+        $.ajax({
+            url: "/resources/save",
+            type: "post",
+            data: json,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (text) {
+                else CloseWindow();
+            }
+        });
+    }
+
+    ////////////////////
+    //标准方法接口定义
+    function SetData(data) {
+        if (data.action == "edit") {
+            //跨页面传递的数据对象，克隆后才可以安全使用
+            data = mini.clone(data);
+            console.log(data);
+            $.ajax({
+                url: "../data/AjaxService.aspx?method=GetEmployee&id=" + data.id,
+                cache: false,
+                success: function (text) {
+                    var o = mini.decode(text);
+                    form.setData(o);
+                    form.setChanged(false);
+
+                    onDeptChanged();
+                    mini.getbyName("position").setValue(o.position);
+                }
+            });
+        }
+    }
+
+    function GetData() {
+        var o = form.getData();
+        return o;
+    }
+    function CloseWindow(action) {
+        if (action == "close" && form.isChanged()) {
+            if (confirm("数据被修改了，是否先保存？")) {
+                return false;
+            }
+        }
+        if (window.CloseOwnerWindow) return window.CloseOwnerWindow(action);
+        else window.close();
+    }
+    function onOk(e) {
+        SaveData();
+    }
+    function onCancel(e) {
+        CloseWindow("cancel");
+    }
+
+</script>
+</body>
+</html>

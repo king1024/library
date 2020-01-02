@@ -77,6 +77,7 @@ public class SysResourcesServiceImpl extends ServiceImpl<SysResourcesMapper, Sys
             resources = JSON.parseObject(pageVo.getFilterStr(), SysResources.class);
         }
         QueryWrapper<SysResources> query=new QueryWrapper<SysResources>(resources);
+        query.orderByDesc("sort");
         Page<SysResources> page = new Page<>(pageVo.getPageIndex()+1,pageVo.getPageSize());
         IPage<SysResources> datas = this.baseMapper.selectPage(page, query);
         pageVo.setData(datas.getRecords());
