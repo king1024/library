@@ -53,26 +53,10 @@ public class LoginController {
 		try{
 			currentUser.login(token);
 			SysUser user = (SysUser)currentUser.getPrincipal();
-//			model.addAttribute("",sysRoleService.findRolesByUser())
-			List<SysRole> roleList=new ArrayList<>();
-			List<SysResources> menuList=new ArrayList<>();
-			List<SysRole> roles = user.getRoles();
-			for (SysRole role:roles) {
-				for(SysResources resources:role.getSysResources()){
-//					resources.setName(resources.getName()+"--"+resources.getId());
-					if("menu".equals(resources.getType())){
-						menuList.add(resources);
-					}
-				}
-				role.setSysResources(null);
-				roleList.add(role);
-			}
-
 			MenuTree tree=new MenuTree();
-			List<MenuNode> menu =tree.buildSysMenuByResources(menuList);
-
+			List<MenuNode> menu =tree.buildSysMenuByResources(user.getResourcesList());
 			model.addAttribute("menu",menu);
-			model.addAttribute("roles",roleList);
+			model.addAttribute("roles",user.getRoles());
 			return "main3";
 		} catch (UnknownAccountException e) {
 			log.info("=========用户名"+username+"不存在========");

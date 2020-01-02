@@ -7,10 +7,7 @@ import com.king.library.sys.pojo.SysRoleResources;
 import com.king.library.sys.service.SysRoleResourcesService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -25,6 +22,7 @@ public class SysRoleResourcesServiceImpl extends ServiceImpl<SysRoleResourcesMap
 
     @Override
     public ResponseVo updateRoleRes(Long roleId, List<String> resIds) {
+//        long a=System.currentTimeMillis();
         Map param=new HashMap();
         param.put("role_id",roleId);
         this.baseMapper.deleteByMap(param);
@@ -36,9 +34,11 @@ public class SysRoleResourcesServiceImpl extends ServiceImpl<SysRoleResourcesMap
             sysUserRole.setResourcesId(new Long(resId));
             roleResources.add(sysUserRole);
         }
-        saveBatch(roleResources);
+//        saveBatch(roleResources,roleResources.size());
+        this.baseMapper.batchInsert(roleResources);
         ResponseVo vo=new ResponseVo();
         vo.setStatus(200);
+//        System.out.println("==========================历时："+(System.currentTimeMillis()-a)+"毫秒=========================");
         return vo;
     }
 }

@@ -1,5 +1,6 @@
 package com.king.library.sys.web;
 
+import com.king.library.common.model.PageVo;
 import com.king.library.common.model.ResponseVo;
 import com.king.library.common.tools.StringTools;
 import com.king.library.sys.pojo.SysRole;
@@ -30,9 +31,8 @@ public class SysRoleController {
 
     @ResponseBody
     @RequestMapping("datas")
-    public List<SysRole> findAllRoles(){
-        List<SysRole> roleList = sysRoleService.list();
-        return roleList;
+    public PageVo findAllRoles(PageVo pageVo){
+        return sysRoleService.findAllRoles(pageVo);
     }
 
     @ResponseBody
@@ -59,7 +59,7 @@ public class SysRoleController {
     @ResponseBody
     @RequestMapping("save")
     public ResponseVo save(@RequestBody SysRole sysRole) {
-        sysRole.setAvailable(true);
+        sysRole.setAvailable(1);
         ResponseVo vo=new ResponseVo(200);
         sysRoleService.save(sysRole);
         return vo;

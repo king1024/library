@@ -31,15 +31,20 @@
       <if test="available==true">
           AND t1.available=1
       </if>
+      order by t1.sort
     </select>
-  <select id="selectResourcesByUserId" resultMap="BaseResultMap" parameterType="long">
+  <select id="selectResourcesByUserId" resultMap="BaseResultMap">
       select t1.id, t1.name, t1.type, t1.url, t1.permission, t1.parent_id, t1.sort, t1.external,
       t1.available, t1.icon
       FROM sys_resources t1
       INNER JOIN sys_role_resources t2 ON t1.id=t2.resources_id
       INNER JOIN sys_user_role t3 ON t2.role_id=t3.role_id
       INNER join sys_role t4 on t4.id=t2.role_id
-      WHERE t1.available=1 and t4.available=1 AND t3.user_id=#{id}
+      WHERE t4.available=1 AND t3.user_id=#{userId}
+      <if test="available==true">
+          AND t1.available=1
+      </if>
+      order by t1.sort
     </select>
 
     <update id="batchForbid">

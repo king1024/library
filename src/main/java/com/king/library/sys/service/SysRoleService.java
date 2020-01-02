@@ -1,6 +1,7 @@
 package com.king.library.sys.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.king.library.common.model.PageVo;
 import com.king.library.common.model.ResponseVo;
 import com.king.library.sys.pojo.SysRole;
 
@@ -17,7 +18,7 @@ import java.util.List;
 public interface SysRoleService extends IService<SysRole> {
     public List<SysRole> findRolesByUser(Integer userId);
 
-    public List<SysRole> findAllRoles();
+    public PageVo findAllRoles(PageVo pageVo);
 
     /**
      * 批量修改

@@ -35,7 +35,7 @@ public class SysResourcesServiceImpl extends ServiceImpl<SysResourcesMapper, Sys
 
     @Override
     public List<SysResources> findAllResourcesByUserId(Integer userId){
-        return this.baseMapper.selectResourcesByUserId(userId);
+        return this.baseMapper.selectResourcesByUserId(userId,true);
     }
 
     @Override

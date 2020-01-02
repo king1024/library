@@ -15,6 +15,7 @@
 <!--url="/sysRole/datas"-->
 <div id="datagrid1" class="mini-datagrid" style="width:100%;height:550px;margin-top: 5px;"
      idField="id" allowResize="true" multiSelect="true"
+     url="/sysRole/datas"
      sizeList="[20,30,50,100]" pageSize="20"
      showHeader="true" title="角色列表" >
     <div property="columns">
@@ -23,7 +24,10 @@
         <div field="id" width="120" headerAlign="center">id</div>
         <div field="description" width="120" headerAlign="center" >角色描述</div>
         <div field="name" width="100"  align="center" headerAlign="center">角色代码</div>
-        <div field="available" align="right" width="100" headerAlign="center" renderer="onGenderRenderer">是否可用</div>
+        <div field="available" align="right" width="100" headerAlign="center" renderer="onGenderRenderer">是否可用
+            <input property="editor" class="mini-combobox" style="width:100%;"
+                   data="[{'id':'1','text':'是'},{'id':'0','text':'否'}]"/>
+        </div>
         <div field="createTime" width="100" headerAlign="center" dateFormat="yyyy-MM-dd">创建时间</div>
         <div field="updateTime" width="100" headerAlign="center" dateFormat="yyyy-MM-dd">修改时间</div>
     </div>
@@ -34,16 +38,7 @@
     var userId="";
     // var grid=$("#datagrid1");
     var grid=mini.get("datagrid1");
-    $(function(){
-        $.ajax({
-            url:"/sysRole/datas",
-            type:"POST",
-            dataType:"json",
-            success: function (text) {
-                grid.setData(text);
-            }
-        });
-    });
+    grid.load();
 
     function setData(e){
         userId=e;

@@ -30,7 +30,7 @@ public class SysRole extends Model<SysRole> {
 
     private String description;
 
-    private Boolean available;
+    private Integer available;
 
     /**
      * 添加时间
@@ -77,11 +77,11 @@ public class SysRole extends Model<SysRole> {
         this.description = description;
     }
 
-    public Boolean getAvailable() {
+    public Integer getAvailable() {
         return available;
     }
 
-    public void setAvailable(Boolean available) {
+    public void setAvailable(Integer available) {
         this.available = available;
     }
 

@@ -15,5 +15,11 @@
   <sql id="Base_Column_List">
         id, role_id, resources_id, create_time, update_time
     </sql>
-
+  <insert id="batchInsert" parameterType="com.king.library.sys.pojo.SysRoleResources">
+    insert into sys_role_resources (role_id, resources_id, create_time, update_time)
+    values 
+    <foreach collection="roleResources"  separator="," item="item" >
+      (#{item.roleId},#{item.resourcesId},now(),now())
+    </foreach>
+  </insert>
 </mapper>

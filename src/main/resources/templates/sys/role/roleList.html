@@ -24,16 +24,31 @@
 </div>
 <div id="datagrid1" class="mini-datagrid" style="width:100%;height:550px;"
      url="/sysRole/datas"
-     idField="id" allowResize="true"
-     sizeList="[20,30,50,100]" pageSize="20"
+     idField="id" allowResize="true" multiSelect="true" allowCellEdit="true" allowCellSelect="true"
+     sizeList="[20,30,50,100]" pageSize="20" showFilterRow="true"
      showHeader="true" title="角色列表" >
     <div property="columns">
-        <div field="id" width="120" headerAlign="center" align="center" renderer="onOptionRenderer">操作</div>
         <div type="indexcolumn" ></div>
+        <div type="checkcolumn" ></div>
+        <div field="id" width="120" headerAlign="center" align="center" renderer="onOptionRenderer">操作</div>
         <div field="id" width="120" headerAlign="center">id</div>
-        <div field="description" width="120" headerAlign="center" >角色描述</div>
-        <div field="name" width="100"  align="center" headerAlign="center">角色代码</div>
-        <div field="available" align="right" width="100" headerAlign="center" renderer="onGenderRenderer">是否可用</div>
+        <div field="description" width="120" headerAlign="center" >角色描述
+            <input property="editor" class="mini-textbox" style="width:100%;"/>
+            <input id="description" name="filterName" property="filter" class="mini-textbox" style="width:100%;"
+                   onvaluechanged="onFilterChanged" showClose="true" oncloseclick="oncloseclick"/>
+        </div>
+        <div field="name" width="100"  align="center" headerAlign="center">角色代码
+            <input property="editor" class="mini-textbox" style="width:100%;"/>
+            <input id="name" name="filterName" property="filter" class="mini-textbox" style="width:100%;"
+                   onvaluechanged="onFilterChanged" showClose="true" oncloseclick="oncloseclick"/>
+        </div>
+        <div field="available" align="right" width="100" headerAlign="center" type="comboboxcolumn">是否可用
+            <input property="editor" class="mini-combobox" style="width:100%;"
+                   data="[{'id':'1','text':'是'},{'id':'0','text':'否'}]"/>
+            <input id="available" name="filterName" property="filter" class="mini-combobox" style="width:100%;"
+                   onvaluechanged="onFilterChanged" showClose="true" oncloseclick="oncloseclick"
+                   data="[{'id':'1','text':'是'},{'id':'0','text':'否'}]" allowInput="true" />
+        </div>
         <div field="createTime" width="100" headerAlign="center" dateFormat="yyyy-MM-dd">创建时间</div>
         <div field="updateTime" width="100" headerAlign="center" dateFormat="yyyy-MM-dd">修改时间</div>
     </div>

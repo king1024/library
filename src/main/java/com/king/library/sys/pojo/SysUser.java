@@ -113,6 +113,16 @@ public class SysUser extends Model<SysUser> {
 
     @TableField(exist=false)
     private List<SysRole> roles;
+    @TableField(exist=false)
+    private List<SysResources> resourcesList;
+
+    public List<SysResources> getResourcesList() {
+        return resourcesList;
+    }
+
+    public void setResourcesList(List<SysResources> resourcesList) {
+        this.resourcesList = resourcesList;
+    }
 
     public List<SysRole> getRoles() {
         return roles;

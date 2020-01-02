@@ -45,7 +45,7 @@
                    onvaluechanged="onFilterChanged" showClose="true" oncloseclick="oncloseclick"
                    data="[{'id':'menu','text':'菜单'},{'id':'button','text':'按钮'}]" allowInput="true" />
         </div>
-        <div field="url" width="120" headerAlign="center" >链接地址
+        <div field="url" width="120" headerAlign="center" dataType="string" >链接地址1
             <input property="editor" class="mini-textbox" style="width:100%;"/>
             <input id="url" name="filterName" property="filter" class="mini-textbox" style="width:100%;"
                    onvaluechanged="onFilterChanged" showClose="true" oncloseclick="oncloseclick"/>
@@ -56,7 +56,11 @@
             <input id="parentId" name="filterName" property="filter" class="mini-textbox" style="width:100%;"
                    onvaluechanged="onFilterChanged" showClose="true" oncloseclick="oncloseclick"/>
         </div>
-        <div field="sort" width="120" headerAlign="center" >排序值</div>
+        <div field="sort" width="120" headerAlign="center" >排序值
+            <input property="editor" class="mini-textbox" style="width:100%;"/>
+            <input id="sort" name="filterName" property="filter" class="mini-textbox" style="width:100%;"
+                   onvaluechanged="onFilterChanged" showClose="true" oncloseclick="oncloseclick"/>
+        </div>
         <div field="external" width="120" headerAlign="center" renderer="onIFRenderer">是否外部链接</div>
         <div field="available" width="120" headerAlign="center" type="comboboxcolumn">是否可用
             <input property="editor" class="mini-combobox" style="width:100%;"
