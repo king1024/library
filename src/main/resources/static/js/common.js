@@ -20,3 +20,9 @@ function getFilterObj(){
 function onFilterChanged(){
     grid.load({filterStr:JSON.stringify(getFilterObj())});
 }
+
+function exportExcel(grid,url,fileName){
+    if(grid.data){
+
+    }
+}
