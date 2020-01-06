@@ -6,8 +6,10 @@
 </head>
 <body>
 
-<div style="padding-bottom:5px;">
+<div>
     <a class="mini-button" iconCls="fa-save" onclick="save()" style="float: right">保存</a>
+    <a class="mini-button" iconCls="fa-save" onclick="allremove()" style="float: right">清空</a>
+    <a class="mini-button" iconCls="fa-save" onclick="allSelect()" style="float: right">全选</a>
 </div>
 <div>
     <ul id="tree1" class="mini-tree" style="width:300px;padding:5px;"
@@ -68,6 +70,13 @@
             window.close();
         }
 
+    }
+
+    function allSelect(){
+        tree.checkAllNodes();
+    }
+    function allremove(){
+        tree.uncheckAllNodes ();
     }
 </script>
 </html>

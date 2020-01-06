@@ -26,3 +26,19 @@ function exportExcel(grid,url,fileName){
 
     }
 }
+
+function arrStrOprat(arrStr,str,flag){
+    var arr;
+    if(arrStr.length==0){
+        arr=new Array();
+    }else{
+        arr=arrStr.split(",");
+    }
+    if(flag=="div"){
+        arr.splice(arr.indexOf(str),1);
+    }
+    if(flag=="add"){
+        arr.push(str);
+    }
+    return arr.join(",");
+}

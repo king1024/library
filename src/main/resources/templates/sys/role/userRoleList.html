@@ -8,18 +8,28 @@
 <body>
 
 <div style="padding-bottom:5px;margin-bottom: 5px;" >
-    <div><span>当前角色:&nbsp;</span><span id="roleList"></span></div>
+    <div>
+        <span>当前角色:&nbsp;</span>
+        <span>
+            <input id="roleList" name="roleList" class="mini-textboxlist" style="width:250px;"
+                   inputMode="false" allowInput="false" valueFromSelect="false"
+                   valueField="id" textField="description"
+            />
+        </span>
+    </div>
+
+
     <a class="mini-button" iconCls="fa-save" style="float: right;" onclick="save()">保存</a>
 
 </div>
 <!--url="/sysRole/datas"-->
 <div id="datagrid1" class="mini-datagrid" style="width:100%;height:550px;margin-top: 5px;"
-     idField="id" allowResize="true" multiSelect="true"
+     idField="id" allowResize="true" multiSelect="true" allowUnselect="true"
      url="/sysRole/datas"
      sizeList="[20,30,50,100]" pageSize="20"
      showHeader="true" title="角色列表" >
     <div property="columns">
-        <div type="checkcolumn" ></div>
+        <!--<div type="checkcolumn" ></div>-->
         <div type="indexcolumn" ></div>
         <div field="id" width="120" headerAlign="center">id</div>
         <div field="description" width="120" headerAlign="center" >角色描述</div>
@@ -36,9 +46,9 @@
 <script>
     mini.parse();
     var userId="";
-    // var grid=$("#datagrid1");
     var grid=mini.get("datagrid1");
     grid.load();
+    var texts=mini.get("roleList");
 
     function setData(e){
         userId=e;
@@ -49,29 +59,40 @@
             success: function (data){
                 if(data!=null && data.length>0){
                     var roleNames="";
+                    var roleIds="";
                     for(var item of data){
                         roleNames += item.description +",";
+                        roleIds += item.id +",";
                     }
                     if(roleNames.length>1){
-                        roleNames=roleNames.substring(0,roleNames.length-1)
+                        roleNames=roleNames.substring(0,roleNames.length-1);
+                        roleIds=roleIds.substring(0,roleIds.length-1);
                     }
-                    $("#roleList").html(roleNames);
+                    texts.setValue(roleIds);
+                    texts.setText(roleNames);
+
+                    var idArr=roleIds.split(",");
+                    var rows=new Array();
+                    for(var item of grid.data){
+                        if(idArr.indexOf(item.id+"")>-1){
+                            rows.add(item);
+                        }
+                    }
+                    grid.selects(rows,false);
                 }
             }
         });
 
-        $("#roleList").html(e);
     }
 
     function save(){
-        var data = grid.getSelecteds ( );
-        if(data.length==0){
-            alert("nononono");
-            return ;
-        }
         var roleids=new Array();
-        for(var item of data){
-            roleids.push(item.id);
+        var val=texts.value;
+        if(val){
+            roleids=texts.value.split(",");
+            for(var i=0;i<roleids.length;i++){
+                roleids[i]=parseInt(roleids[i]);
+            }
         }
         var param={};
         param.roleids=roleids;
@@ -100,7 +121,33 @@
         }else{
             window.close();
         }
-
     }
+
+    grid.on("rowclick",function(e){
+        var val=texts.getValue();
+        var text=texts.getText();
+        if(grid.isSelected(e.row)){
+            texts.setValue(arrStrOprat(val,e.row.id,"add"));
+            texts.setText(arrStrOprat(text,e.row.description,"add"));
+        }else{
+            texts.setValue(arrStrOprat(val,e.row.id,"div"));
+            texts.setText(arrStrOprat(text,e.row.description,"div"));
+        }
+    });
+
+    texts.on("removeitem",function(e){
+        removeRow(e.item.id);
+    });
+
+    function removeRow(e){
+        var id=parseInt(e);
+        for(var item of grid.data){
+            if(id==item.id){
+                grid.deselect(item,false);
+                return;
+            }
+        }
+    }
+
 </script>
 </html>
