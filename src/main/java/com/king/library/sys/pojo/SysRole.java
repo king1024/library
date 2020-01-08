@@ -1,6 +1,7 @@
 package com.king.library.sys.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.KeySequence;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -16,12 +17,13 @@ import java.util.List;
  * @author duanyong
  * @since 2019-12-27
  */
+@KeySequence("kingKeyGenerator")
 public class SysRole extends Model<SysRole> {
 
     private static final long serialVersionUID=1L;
 
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    @TableId(value = "id", type = IdType.INPUT)
+    private String id;
 
     /**
      * 角色名
@@ -53,11 +55,11 @@ public class SysRole extends Model<SysRole> {
         this.sysResources = sysResources;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

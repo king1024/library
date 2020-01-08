@@ -3,6 +3,7 @@ package com.king.library.sys.web;
 import com.king.library.common.model.PageVo;
 import com.king.library.common.model.ResponseVo;
 import com.king.library.common.tools.StringTools;
+import com.king.library.config.mybatis.KingKeyGenerator;
 import com.king.library.sys.pojo.SysRole;
 import com.king.library.sys.service.SysRoleResourcesService;
 import com.king.library.sys.service.SysRoleService;
@@ -55,6 +56,8 @@ public class SysRoleController {
         return sysRoleResourcesService.updateRoleRes(roleId,resIds);
     }
 
+    @Autowired
+    private KingKeyGenerator kingKeyGenerator;
 
     @ResponseBody
     @RequestMapping("save")

@@ -1,5 +1,6 @@
 package com.king.library.common.model;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -8,11 +9,11 @@ import java.util.Map;
  * @author: duanyong
  * @desc:
  */
-public class PageVo {
+public class PageVo implements Serializable {
     /**
      * 参数
      */
-    private Map params;
+    private Map<String,Object> dataMap;
     /**
      * 具体数据
      */
@@ -20,43 +21,27 @@ public class PageVo {
     /**
      * 页码
      */
-    private long pageIndex;
+    private Long pageIndex;
     /**
      * 每页多少条
      */
-    private long pageSize;
+    private Long pageSize;
     /**
      * 总共多少条
      */
-    private long total;
-
-    public long getTotal() {
-        return total;
-    }
-
-    public void setTotal(long total) {
-        this.total = total;
-    }
+    private Long total;
 
     /**
      * 前端过滤字段
      */
     private String filterStr;
 
-    public String getFilterStr() {
-        return filterStr;
+    public Map<String, Object> getDataMap() {
+        return dataMap;
     }
 
-    public void setFilterStr(String filterStr) {
-        this.filterStr = filterStr;
-    }
-
-    public Map getParams() {
-        return params;
-    }
-
-    public void setParams(Map params) {
-        this.params = params;
+    public void setDataMap(Map<String, Object> dataMap) {
+        this.dataMap = dataMap;
     }
 
     public List getData() {
@@ -67,20 +52,35 @@ public class PageVo {
         this.data = data;
     }
 
-    public long getPageIndex() {
+    public Long getPageIndex() {
         return pageIndex;
     }
 
-    public void setPageIndex(long pageIndex) {
+    public void setPageIndex(Long pageIndex) {
         this.pageIndex = pageIndex;
     }
 
-    public long getPageSize() {
+    public Long getPageSize() {
         return pageSize;
     }
 
-    public void setPageSize(long pageSize) {
+    public void setPageSize(Long pageSize) {
         this.pageSize = pageSize;
     }
 
+    public Long getTotal() {
+        return total;
+    }
+
+    public void setTotal(Long total) {
+        this.total = total;
+    }
+
+    public String getFilterStr() {
+        return filterStr;
+    }
+
+    public void setFilterStr(String filterStr) {
+        this.filterStr = filterStr;
+    }
 }

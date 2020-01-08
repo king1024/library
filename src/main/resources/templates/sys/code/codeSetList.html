@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.0rg">
+<head th:include="common.html"></head>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div style="padding-bottom:5px;">
+    <table style="width:100%;">
+        <tr>
+            <td style="width:100%;">
+                <!--<span>资源名称：</span><input type="text" id="key"  />
+                <input type="button" value="查找" onclick="search()"/>-->
+            </td>
+            <td style="white-space:nowrap;">
+                <a class="mini-button" iconCls="fa-plus" onclick="add()">增加</a>
+                <a class="mini-button" iconCls="fa-remove" onclick="batchForbid()">禁用</a>
+                <a class="mini-button" iconCls="fa-remove" onclick="remove()">删除</a>
+                <a class="mini-button" iconCls="fa-save" onclick="save()">保存</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="datagrid1" class="mini-datagrid" style="width:100%;height:550px;"
+     url="/sysCodeSet/datas"
+     idField="id" allowResize="true" multiSelect="true"
+     sizeList="[20,30,50,100]" pageSize="20" allowCellEdit="true" allowCellSelect="true"
+     showHeader="true" title="代码列表" showFilterRow="true">
+    <div property="columns">
+        <div type="checkcolumn" ></div>
+        <div type="indexcolumn" ></div>
+        <div field="setId" width="120" headerAlign="center">setId</div>
+        <div field="setName" width="120" headerAlign="center" >代码
+            <input property="editor" class="mini-textbox" style="width:100%;"/>
+            <input id="setName" name="filterName" property="filter" class="mini-textbox" style="width:100%;"
+                   onvaluechanged="onFilterChanged" showClose="true" oncloseclick="oncloseclick"/>
+        </div>
+        <div field="setStatus" width="120" headerAlign="center" type="comboboxcolumn">是否可用
+            <input property="editor" class="mini-combobox" style="width:100%;"
+                   data="[{'id':'1','text':'是'},{'id':'0','text':'否'}]"/>
+            <input id="setStatus" name="filterName" property="filter" class="mini-combobox" style="width:100%;"
+                   onvaluechanged="onFilterChanged" showClose="true" oncloseclick="oncloseclick"
+                   data="[{'id':'1','text':'是'},{'id':'0','text':'否'}]" allowInput="true" />
+        </div>
+        <div field="setBak" width="120" headerAlign="center" dataType="string" >备注
+            <input property="editor" class="mini-textbox" style="width:100%;"/>
+            <input id="setBak" name="filterName" property="filter" class="mini-textbox" style="width:100%;"
+                   onvaluechanged="onFilterChanged" showClose="true" oncloseclick="oncloseclick"/>
+        </div>
+        <div field="id" width="120" headerAlign="center" align="center" renderer="onOptionRenderer">操作</div>
+    </div>
+</div>
+</body>
+<script>
+    mini.parse();
+    var grid=mini.get("datagrid1");
+    grid.load();
+
+    function onOptionRenderer(e){
+        var record=e.record;
+        var html='<i class="fa fa-gg" title="明细" onclick="toItemList(\''+record.setId+'\')"></i>'
+        return html;
+    }
+    function toItemList(e){
+        //新增弹窗
+        mini.open({
+            url: "/page/sys/code/codeItemList",
+            title: "信息页面",
+            width: "800",
+            height: "600",
+            onload: function () {
+                var iframe = this.getIFrameEl();
+                iframe.contentWindow.SetData(e);
+            },
+            ondestroy: function (action) {
+                grid.reload();
+            }
+        });
+    }
+
+    function add() {
+        mini.open({
+            targetWindow: window,
+            url: "/page/sys/code/codeSetDetail",
+            title: "新增代码", width: 600, height: 400,
+            onload: function () {
+                var iframe = this.getIFrameEl();
+                var data = { action: "new" };
+                iframe.contentWindow.SetData(data);
+            },
+            ondestroy: function (action) {
+                grid.reload();
+            }
+        });
+    }
+
+    function save(){
+        var data = grid.getChanges();
+        $.ajax({
+            url: "/sysCodeSet/batchUpdate",
+            data: JSON.stringify(data),
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (text) {
+                grid.reload();
+            }
+        });
+    }
+
+    function onIFRenderer(e) {
+        if (e.value == 1) return "是";
+        else return "否";
+    }
+
+    function batchForbid(){
+        var data = grid.getSelecteds();
+        if(data.length==0){
+            mini.alert("没有东西","友情提示");
+        }
+        var ids=new Array();
+        for(var item of data){
+            ids.push(item.id);
+        }
+        $.ajax({
+            url: "/resources/forbid",
+            data: JSON.stringify(ids),
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (text) {
+                grid.reload();
+            }
+        });
+    }
+
+    function remove(){
+        var data = grid.getSelecteds();
+        if(data.length==0){
+            mini.alert("没有东西","友情提示");
+        }
+        var ids=new Array();
+        for(var item of data){
+            ids.push(item.id);
+        }
+        $.ajax({
+            url: "/resources/remove",
+            data: JSON.stringify(ids),
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (text) {
+                grid.reload();
+            }
+        });
+    }
+</script>
+</html>

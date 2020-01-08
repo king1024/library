@@ -41,8 +41,8 @@ public class ResourcesController {
 
     @ResponseBody
     @RequestMapping("treeData")
-    public List<TreeNode> getTreeData(int userId){
-        List<TreeNode> treeNodes = sysResourcesService.getTreeData(userId);
+    public List<TreeNode> getTreeData(int roleId){
+        List<TreeNode> treeNodes = sysResourcesService.getTreeData(roleId);
         return treeNodes;
     }
 
@@ -60,6 +60,9 @@ public class ResourcesController {
     @ResponseBody
     @RequestMapping("save")
     public ResponseVo save(@RequestBody SysResources res) {
+        if(res.getParentId()==null){
+            res.setParentId(0L);
+        }
         return sysResourcesService.saveResource(res);
     }
 

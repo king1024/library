@@ -14,7 +14,7 @@
 <div>
     <ul id="tree1" class="mini-tree" style="width:300px;padding:5px;"
         expandOnLoad="0"
-        textField="text" idField="id" parentField="parentId"
+        textField="text" idField="id" parentField="parentId" checkRecursive="false" autoCheckParent="true"
         showTreeIcon="true" showCheckBox="true" resultAsTree="false">
     </ul>
 </div>
@@ -28,7 +28,7 @@
     var roleId="";
     function setData(e){
         roleId=e;
-        tree.setUrl("/resources/treeData?userId="+roleId);
+        tree.setUrl("/resources/treeData?roleId="+roleId);
         tree.load();
     }
 

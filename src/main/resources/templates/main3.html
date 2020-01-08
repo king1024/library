@@ -26,7 +26,8 @@
         <li><a href="#"><i class="fa fa-tasks"></i></a></li>
         <li class="dropdown">
             <a class="dropdown-toggle userinfo">
-                <img class="user-img" th:src="@{/image/user.jpg}" />个人资料<i class="fa fa-angle-down"></i>
+                <img class="user-img" th:src="@{/image/user.jpg}" />
+                <label th:text="${username}"></label><i class="fa fa-angle-down"></i>
             </a>
             <ul class="dropdown-menu pull-right">
                 <li><a href="#"><i class="fa fa-user "></i>个人设置</a></li>

@@ -1,5 +1,7 @@
 package com.king.library.common.model;
 
+import com.king.library.common.constants.StatusEnum;
+
 /**
  * @date: 2019/12/25 11:58
  * @author: duanyong
@@ -17,7 +19,7 @@ public class ResponseVo <T> {
     }
 
     public ResponseVo(String message) {
-        this.status=500;
+        this.status= StatusEnum.ERROR.getCode();
         this.message = message;
     }
 

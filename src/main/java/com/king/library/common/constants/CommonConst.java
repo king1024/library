@@ -20,4 +20,5 @@ public class CommonConst {
      * 程序默认的成功状态码
      */
     public static final int DEFAULT_SUCCESS_CODE = 200;
+
 }

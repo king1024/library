@@ -57,6 +57,7 @@ public class LoginController {
 //			List<MenuNode> menu =tree.buildSysMenuByResources(user.getResourcesList());
 //			model.addAttribute("menu",menu);
 			model.addAttribute("roles",user.getRoles());
+			model.addAttribute("username",user.getUsername());
 			return "main3";
 		} catch (UnknownAccountException e) {
 			log.info("=========用户名"+username+"不存在========");

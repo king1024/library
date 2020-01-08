@@ -28,9 +28,9 @@ public class PlusGenerator {
     //作者
     private static String authorName = "duanyong";
     //要生成的表名
-    private static String[] tables = {"sys_user","sys_user_role","sys_role","sys_role_resources","sys_resources"};
-//    private static String[] tables = {"orders","person"};
-    //table前缀
+//    private static String[] tables = {"sys_user","sys_user_role","sys_role","sys_role_resources","sys_resources"};
+    private static String[] tables = {"sys_code_set","sys_code_item"};
+//    table前缀
 //    SELECT * FROM sys_user;
 //    SELECT * FROM sys_user_role;
 //    SELECT * FROM sys_role;
@@ -199,6 +199,7 @@ public class PlusGenerator {
 
         // 执行生成
         gen.execute();
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>  OK  <<<<<<<<<<<<<<<<<<<<<<<<<<");
     }
 }
 
