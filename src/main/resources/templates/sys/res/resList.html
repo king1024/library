@@ -50,7 +50,11 @@
             <input id="url" name="filterName" property="filter" class="mini-textbox" style="width:100%;"
                    onvaluechanged="onFilterChanged" showClose="true" oncloseclick="oncloseclick"/>
         </div>
-        <div field="permission" width="120" headerAlign="center" >权限代码</div>
+        <div field="permission" width="120" headerAlign="center" >权限代码
+            <input property="editor" class="mini-textbox" style="width:100%;"/>
+            <input id="permission" name="filterName" property="filter" class="mini-textbox" style="width:100%;"
+                   onvaluechanged="onFilterChanged" showClose="true" oncloseclick="oncloseclick"/>
+        </div>
         <div field="parentId" width="120" headerAlign="center" >上级节点id
             <input property="editor" class="mini-textbox" style="width:100%;"/>
             <input id="parentId" name="filterName" property="filter" class="mini-textbox" style="width:100%;"
@@ -71,6 +75,11 @@
         </div>
         <div field="icon" width="120" headerAlign="center" >资源图标
             <input property="editor" class="mini-textbox" style="width:100%;"/>
+        </div>
+        <div field="treeId" width="120" headerAlign="center" >treeId
+            <input property="editor" class="mini-textbox" style="width:100%;"/>
+            <input id="treeId" name="filterName" property="filter" class="mini-textbox" style="width:100%;"
+                   onvaluechanged="onFilterChanged" showClose="true" oncloseclick="oncloseclick"/>
         </div>
         <div field="createTime" width="100" headerAlign="center" dateFormat="yyyy-MM-dd" visible="false">创建时间</div>
         <div field="updateTime" width="100" headerAlign="center" dateFormat="yyyy-MM-dd">修改时间</div>
@@ -127,12 +136,15 @@
             ids.push(item.id);
         }
         $.ajax({
-            url: "/resources/forbid",
+            url: "/resources/batchForbid",
             data: JSON.stringify(ids),
             type: "POST",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (text) {
+                if(text.status!="200"){
+                    mini.alert(text.message);
+                }
                 grid.reload();
             }
         });

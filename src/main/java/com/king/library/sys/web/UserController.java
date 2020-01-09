@@ -1,6 +1,7 @@
 package com.king.library.sys.web;
 
 import com.alibaba.fastjson.JSONObject;
+import com.king.library.common.constants.StatusEnum;
 import com.king.library.common.model.PageVo;
 import com.king.library.common.model.ResponseVo;
 import com.king.library.common.tools.CommonUtil;
@@ -34,13 +35,14 @@ public class UserController {
 	/**
 	 * 查询用户列表
 	 */
-//	@RequiresPermissions("user:list")
+	@RequiresPermissions("user:list")
 	@ResponseBody
 	@RequestMapping("datas")
 	public PageVo listUser(PageVo pageVo) {
 		return sysUserService.listUser(pageVo);
 	}
 
+	@RequiresPermissions("user:updateRoles")
 	@ResponseBody
 	@RequestMapping("updateRoles")
 	public ResponseVo updateRoles(@RequestBody Map param) {
@@ -54,6 +56,7 @@ public class UserController {
 		return sysUserRoleService.updateUserRole(userId,roleIds);
 	}
 
+	@RequiresPermissions("user:add")
 	@ResponseBody
 	@RequestMapping("save")
 	public ResponseVo save(@RequestBody SysUser sysUser) {
@@ -61,23 +64,25 @@ public class UserController {
 			sysUser.setPassword("123456");
 		}
 		sysUser.setStatus(1);
-		ResponseVo vo=new ResponseVo(200);
+		ResponseVo vo=new ResponseVo(StatusEnum.SUCCESS.getCode());
 		sysUserService.save(sysUser);
 		return vo;
 	}
 
+	@RequiresPermissions("user:update")
 	@ResponseBody
 	@RequestMapping("update")
 	public ResponseVo update(@RequestBody List<SysUser> sysUserList) {
 		return sysUserService.batchUpdate(sysUserList);
 	}
 
+	@RequiresPermissions("user:delete")
 	@ResponseBody
 	@RequestMapping("remove")
 	public ResponseVo remove(@RequestBody List<String> resList) {
-		ResponseVo vo=new ResponseVo(200);
+		ResponseVo vo=new ResponseVo(StatusEnum.SUCCESS.getCode());
 		if(!sysUserService.removeByIds(resList)){
-			vo.setStatus(500);
+			vo.setStatus(StatusEnum.ERROR.getCode());
 			vo.setMessage("删除失败");
 		}
 		return vo;

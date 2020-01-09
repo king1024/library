@@ -41,6 +41,20 @@ public class SysResourcesServiceImpl extends ServiceImpl<SysResourcesMapper, Sys
 
     @Override
     public ResponseVo saveResource(SysResources res) {
+        Long parentId=res.getParentId();
+        if(parentId==null){
+            parentId=new Long("0");
+        }
+        SysResources maxres=this.baseMapper.getMaxTreeIdForParent(parentId);
+        String maxTreeId="";
+        if(maxres==null){
+            SysResources parent=this.baseMapper.selectById(parentId);
+            maxTreeId=parent.getTreeId()+"001";
+        }else{
+            long num=Long.parseLong(maxres.getTreeId())+1;
+            maxTreeId=num+"";
+        }
+        res.setTreeId(maxTreeId);
         int rn=this.baseMapper.insert(res);
         if(rn>0){
             return new ResponseVo(StatusEnum.SUCCESS.getCode());
@@ -74,7 +88,7 @@ public class SysResourcesServiceImpl extends ServiceImpl<SysResourcesMapper, Sys
     @Override
     public PageVo findAllResForPage(PageVo pageVo) {
         QueryWrapper<SysResources> query= CommonUtil.getQueryWrapperByFilterStr(pageVo.getFilterStr(), SysResources.class);
-        query.orderByDesc("sort");
+        query.orderByAsc("tree_id","sort");
         Page<SysResources> page = new Page<>(pageVo.getPageIndex()+1,pageVo.getPageSize());
         IPage<SysResources> datas = this.baseMapper.selectPage(page, query);
         pageVo.setData(datas.getRecords());

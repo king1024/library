@@ -1,6 +1,7 @@
 package com.king.library.sys.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.king.library.common.constants.StatusEnum;
 import com.king.library.common.model.ResponseVo;
 import com.king.library.sys.mapper.SysUserRoleMapper;
 import com.king.library.sys.pojo.SysUserRole;
@@ -39,7 +40,7 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
         }
         saveBatch(urs);
         ResponseVo vo=new ResponseVo();
-        vo.setStatus(200);
+        vo.setStatus(StatusEnum.SUCCESS.getCode());
         return vo;
     }
 }

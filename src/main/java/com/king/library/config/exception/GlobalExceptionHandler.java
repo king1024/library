@@ -1,7 +1,8 @@
 package com.king.library.config.exception;
 
 import com.alibaba.fastjson.JSONObject;
-import com.king.library.common.constants.ErrorEnum;
+import com.king.library.common.constants.StatusEnum;
+import com.king.library.common.model.ResponseVo;
 import com.king.library.common.tools.CommonUtil;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
@@ -19,8 +20,8 @@ import javax.servlet.http.HttpServletRequest;
  * @author: duanyong
  * @desc:统一异常拦截
  */
-//@ControllerAdvice
-//@ResponseBody
+@ControllerAdvice
+@ResponseBody
 public class GlobalExceptionHandler {
 	private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
@@ -35,8 +36,8 @@ public class GlobalExceptionHandler {
 			errorPosition = fileName + ":" + lineNumber;
 		}
 		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("code", ErrorEnum.E_400.getErrorCode());
-		jsonObject.put("msg", ErrorEnum.E_400.getErrorMsg());
+		jsonObject.put("code", StatusEnum.E_400.getCode());
+		jsonObject.put("msg", StatusEnum.E_400.getDesc());
 		JSONObject errorObject = new JSONObject();
 		errorObject.put("errorLocation", e.toString() + "    错误位置:" + errorPosition);
 		jsonObject.put("info", errorObject);
@@ -50,8 +51,8 @@ public class GlobalExceptionHandler {
 	 * 所以定义了这个拦截器
 	 */
 	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-	public JSONObject httpRequestMethodHandler() {
-		return CommonUtil.errorJson(ErrorEnum.E_500);
+	public ResponseVo httpRequestMethodHandler() {
+		return CommonUtil.errorReponse(StatusEnum.E_500);
 	}
 
 	/**
@@ -60,7 +61,7 @@ public class GlobalExceptionHandler {
 	 * 常见使用场景是参数校验失败,抛出此错,返回错误信息给前端
 	 */
 	@ExceptionHandler(CommonJsonException.class)
-	public JSONObject commonJsonExceptionHandler(CommonJsonException commonJsonException) {
+	public ResponseVo commonJsonExceptionHandler(CommonJsonException commonJsonException) {
 		return commonJsonException.getResultJson();
 	}
 
@@ -68,8 +69,8 @@ public class GlobalExceptionHandler {
 	 * 权限不足报错拦截
 	 */
 	@ExceptionHandler(UnauthorizedException.class)
-	public JSONObject unauthorizedExceptionHandler() {
-		return CommonUtil.errorJson(ErrorEnum.E_502);
+	public ResponseVo unauthorizedExceptionHandler() {
+		return CommonUtil.errorReponse(StatusEnum.E_502);
 	}
 
 	/**
@@ -77,7 +78,7 @@ public class GlobalExceptionHandler {
 	 * 在请求需要权限的接口,而连登录都还没登录的时候,会报此错
 	 */
 	@ExceptionHandler(UnauthenticatedException.class)
-	public JSONObject unauthenticatedException() {
-		return CommonUtil.errorJson(ErrorEnum.E_20011);
+	public ResponseVo unauthenticatedException() {
+		return CommonUtil.errorReponse(StatusEnum.E_20011);
 	}
 }

@@ -30,7 +30,6 @@ public class PageVoMethodArgumentResolver implements HandlerMethodArgumentResolv
             Map parameterMap=nativeWebRequest.getParameterMap();
             Map map= ReflectUtil.mapArrToMapObject(parameterMap);
             ReflectUtil.mapToBeanAndFieldMap(pageVo=new PageVo(),map,"dataMap");
-
         }
         return pageVo;
     }

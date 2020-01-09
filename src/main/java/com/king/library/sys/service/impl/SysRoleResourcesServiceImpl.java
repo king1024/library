@@ -1,6 +1,7 @@
 package com.king.library.sys.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.king.library.common.constants.StatusEnum;
 import com.king.library.common.model.ResponseVo;
 import com.king.library.sys.mapper.SysRoleResourcesMapper;
 import com.king.library.sys.pojo.SysRoleResources;
@@ -37,7 +38,7 @@ public class SysRoleResourcesServiceImpl extends ServiceImpl<SysRoleResourcesMap
 //        saveBatch(roleResources,roleResources.size());
         this.baseMapper.batchInsert(roleResources);
         ResponseVo vo=new ResponseVo();
-        vo.setStatus(200);
+        vo.setStatus(StatusEnum.SUCCESS.getCode());
 //        System.out.println("==========================历时："+(System.currentTimeMillis()-a)+"毫秒=========================");
         return vo;
     }

@@ -1,5 +1,7 @@
 package com.king.library.common.tools;
 
+import org.apache.ibatis.session.Configuration;
+
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -58,6 +60,7 @@ public class ReflectUtil {
         if(fieldMap.containsKey(mapName)){
             setField(fieldMap.get(mapName),obj,map);
         }
+
     }
 
     public static void setField(Field field,Object obj,Object fieldValue) throws IllegalAccessException {
@@ -68,6 +71,7 @@ public class ReflectUtil {
             field.set(obj,fieldValue);
             field.setAccessible(false);
         }
+
     }
 
     public static Object converType(Field field,Object obj){

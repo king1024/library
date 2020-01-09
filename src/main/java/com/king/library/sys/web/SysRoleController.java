@@ -1,9 +1,9 @@
 package com.king.library.sys.web;
 
+import com.king.library.common.constants.StatusEnum;
 import com.king.library.common.model.PageVo;
 import com.king.library.common.model.ResponseVo;
 import com.king.library.common.tools.StringTools;
-import com.king.library.config.mybatis.KingKeyGenerator;
 import com.king.library.sys.pojo.SysRole;
 import com.king.library.sys.service.SysRoleResourcesService;
 import com.king.library.sys.service.SysRoleService;
@@ -56,14 +56,11 @@ public class SysRoleController {
         return sysRoleResourcesService.updateRoleRes(roleId,resIds);
     }
 
-    @Autowired
-    private KingKeyGenerator kingKeyGenerator;
-
     @ResponseBody
     @RequestMapping("save")
     public ResponseVo save(@RequestBody SysRole sysRole) {
         sysRole.setAvailable(1);
-        ResponseVo vo=new ResponseVo(200);
+        ResponseVo vo=new ResponseVo(StatusEnum.SUCCESS.getCode());
         sysRoleService.save(sysRole);
         return vo;
     }
@@ -77,9 +74,9 @@ public class SysRoleController {
     @ResponseBody
     @RequestMapping("remove")
     public ResponseVo remove(@RequestBody List<String> resList) {
-        ResponseVo vo=new ResponseVo(200);
+        ResponseVo vo=new ResponseVo(StatusEnum.SUCCESS.getCode());
         if(!sysRoleService.removeByIds(resList)){
-            vo.setStatus(500);
+            vo.setStatus(StatusEnum.ERROR.getCode());
             vo.setMessage("删除失败");
         }
         return vo;

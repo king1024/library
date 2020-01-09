@@ -1,12 +1,9 @@
 package com.king.library.common.tools;
 
 import com.king.library.common.constants.CommonConst;
-import com.king.library.common.constants.ResponseStatus;
+import com.king.library.common.constants.StatusEnum;
 import com.king.library.common.model.ResponseVo;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,32 +24,32 @@ public class ResultUtil {
         return new ModelAndView("redirect:" + view);
     }
 
-    public static ResponseVo error(int code, String message) {
+    public static ResponseVo error(String code, String message) {
         return vo(code, message, null);
     }
 
-    public static ResponseVo error(ResponseStatus status) {
-        return vo(status.getCode(), status.getMessage(), null);
+    public static ResponseVo error(StatusEnum status) {
+        return vo(status.getCode(), status.getDesc(), null);
     }
 
     public static ResponseVo error(String message) {
-        return vo(CommonConst.DEFAULT_ERROR_CODE, message, null);
+        return vo(StatusEnum.ERROR.getCode(), message, null);
     }
 
     public static ResponseVo success(String message, Object data) {
-        return vo(CommonConst.DEFAULT_SUCCESS_CODE, message, data);
+        return vo(StatusEnum.SUCCESS.getCode(), message, data);
     }
 
     public static ResponseVo success(String message) {
         return success(message, null);
     }
 
-    public static ResponseVo success(ResponseStatus status) {
-        return vo(status.getCode(), status.getMessage(), null);
+    public static ResponseVo success(StatusEnum status) {
+        return vo(status.getCode(), status.getDesc(), null);
     }
 
-    public static ResponseVo vo(int code, String message, Object data) {
-        return new ResponseVo<>(code, message, data);
+    public static ResponseVo vo(String code, String message, Object data) {
+        return new ResponseVo(code, message, data);
     }
 
 //    public static PageResult tablePage(Long total, List<?> list) {

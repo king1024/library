@@ -6,6 +6,7 @@ import com.king.library.common.model.ResponseVo;
 import com.king.library.common.tools.StringTools;
 import com.king.library.sys.pojo.SysCodeSet;
 import com.king.library.sys.service.SysCodeSetService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,6 +32,7 @@ public class SysCodeSetController {
     @Autowired
     private SysCodeSetService sysCodeSetService;
 
+    @RequiresPermissions("sysCodeSet:list")
     @ResponseBody
     @RequestMapping("datas")
     public PageVo findAllResForPage(PageVo pageVo){

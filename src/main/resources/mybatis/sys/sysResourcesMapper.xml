@@ -16,15 +16,18 @@
     <result column="icon" property="icon" />
     <result column="create_time" property="createTime" />
     <result column="update_time" property="updateTime" />
+    <result column="tree_id" property="treeId" />
   </resultMap>
 
   <!-- 通用查询结果列 -->
   <sql id="Base_Column_List">
-        id, name, type, url, permission, parent_id, sort, external, available, icon, create_time, update_time
-    </sql>
+        id, name, type, url, permission, parent_id, sort, external, available, icon, create_time, update_time,tree_id
+  </sql>
+  <sql id="Base_Column_List_t1">
+        t1.id, t1.name, t1.type, t1.url, t1.permission, t1.parent_id, t1.sort, t1.external, t1.available, t1.icon, t1.create_time, t1.update_time, t1.tree_id
+  </sql>
   <select id="selectResByRoleId" resultMap="BaseResultMap">
-      select t1.id, t1.name, t1.type, t1.url, t1.permission, t1.parent_id, t1.sort, t1.external,
-      t1.available, t1.icon
+      select <include refid="Base_Column_List_t1"></include>
       FROM sys_resources t1
       INNER JOIN sys_role_resources t2 ON t1.id=t2.resources_id
       WHERE t2.role_id=#{id}
@@ -34,8 +37,7 @@
       order by t1.sort
     </select>
   <select id="selectResourcesByUserId" resultMap="BaseResultMap">
-      select t1.id, t1.name, t1.type, t1.url, t1.permission, t1.parent_id, t1.sort, t1.external,
-      t1.available, t1.icon
+      select <include refid="Base_Column_List_t1"></include>
       FROM sys_resources t1
       INNER JOIN sys_role_resources t2 ON t1.id=t2.resources_id
       INNER JOIN sys_user_role t3 ON t2.role_id=t3.role_id
@@ -54,4 +56,9 @@
             #{rid}
         </foreach>
     </update>
+
+    <select id="getMaxTreeIdForParent" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"></include>
+        FROM sys_resources WHERE parent_id=#{parentId} ORDER BY tree_id DESC LIMIT 1;
+    </select>
 </mapper>

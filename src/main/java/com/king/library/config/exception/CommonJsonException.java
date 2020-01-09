@@ -1,7 +1,7 @@
 package com.king.library.config.exception;
 
-import com.alibaba.fastjson.JSONObject;
-import com.king.library.common.constants.ErrorEnum;
+import com.king.library.common.constants.StatusEnum;
+import com.king.library.common.model.ResponseVo;
 import com.king.library.common.tools.CommonUtil;
 
 /**
@@ -12,7 +12,7 @@ import com.king.library.common.tools.CommonUtil;
  * @date: 2019/12/13 17:12
  */
 public class CommonJsonException extends RuntimeException {
-	private JSONObject resultJson;
+	private ResponseVo resultJson;
 
 	/**
 	 * 调用时可以在任何代码处直接throws这个Exception,
@@ -20,15 +20,15 @@ public class CommonJsonException extends RuntimeException {
 	 *
 	 * @param errorEnum 以错误的ErrorEnum做参数
 	 */
-	public CommonJsonException(ErrorEnum errorEnum) {
-		this.resultJson = CommonUtil.errorJson(errorEnum);
+	public CommonJsonException(StatusEnum errorEnum) {
+		this.resultJson = CommonUtil.errorReponse(errorEnum);
 	}
 
-	public CommonJsonException(JSONObject resultJson) {
+	public CommonJsonException(ResponseVo resultJson) {
 		this.resultJson = resultJson;
 	}
 
-	public JSONObject getResultJson() {
+	public ResponseVo getResultJson() {
 		return resultJson;
 	}
 }

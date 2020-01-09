@@ -43,9 +43,9 @@ public class UserRealm extends AuthorizingRealm {
 		}else{
 			for(SysRole role:user.getRoles()) {
 				authorizationInfo.addRole(role.getName());
-				for (SysResources resources : role.getSysResources()) {
-					authorizationInfo.addStringPermission(resources.getPermission());
-				}
+			}
+			for (SysResources resources : user.getResourcesList()) {
+				authorizationInfo.addStringPermission(resources.getPermission());
 			}
 		}
 //		Session session = SecurityUtils.getSubject().getSession();

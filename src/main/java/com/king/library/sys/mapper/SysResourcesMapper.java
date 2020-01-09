@@ -23,4 +23,11 @@ public interface SysResourcesMapper extends BaseMapper<SysResources> {
      * @param resList
      */
     void batchForbid(List<String> resList);
+
+    /**
+     * 获取treeId最大的
+     * @param parentId
+     * @return
+     */
+    SysResources getMaxTreeIdForParent(Long parentId);
 }

@@ -8,11 +8,11 @@ import com.king.library.common.constants.StatusEnum;
  * @desc:
  */
 public class ResponseVo <T> {
-    private Integer status;
+    private String status;
     private String message;
     private T data;
 
-    public ResponseVo(Integer status, String message, T data) {
+    public ResponseVo(String status, String message, T data) {
         this.status = status;
         this.message = message;
         this.data = data;
@@ -23,23 +23,19 @@ public class ResponseVo <T> {
         this.message = message;
     }
 
-    public ResponseVo(Integer status) {
-        this.status = status;
-    }
-
     public ResponseVo(T data) {
-        this.status=200;
+        this.status=StatusEnum.SUCCESS.getCode();
         this.data = data;
     }
 
     public ResponseVo() {
     }
 
-    public Integer getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

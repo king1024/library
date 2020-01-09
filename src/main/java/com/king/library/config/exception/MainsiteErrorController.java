@@ -1,10 +1,9 @@
 package com.king.library.config.exception;
 
-import com.alibaba.fastjson.JSONObject;
-import com.king.library.common.constants.ErrorEnum;
+import com.king.library.common.constants.StatusEnum;
+import com.king.library.common.model.ResponseVo;
 import com.king.library.common.tools.CommonUtil;
 import org.springframework.boot.web.servlet.error.ErrorController;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -26,8 +25,8 @@ public class MainsiteErrorController implements ErrorController {
 	 */
 	@RequestMapping(value = ERROR_PATH)
 	@ResponseBody
-	public JSONObject handleError() {
-		return CommonUtil.errorJson(ErrorEnum.E_501);
+	public ResponseVo handleError() {
+		return CommonUtil.errorReponse(StatusEnum.E_501);
 	}
 
 	@Override

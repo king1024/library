@@ -40,6 +40,16 @@ public class SysResources extends Model<SysResources> {
 
     private Integer available;
 
+    private String treeId;
+
+    public String getTreeId() {
+        return treeId;
+    }
+
+    public void setTreeId(String treeId) {
+        this.treeId = treeId;
+    }
+
     /**
      * 菜单图标
      */
