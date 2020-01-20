@@ -80,7 +80,7 @@ public class LoginController {
 			currentUser.logout();
 		} catch (Exception e) {
 		}
-		return "login02";
+		return "login";
 	}
 
 	@ResponseBody
