@@ -5,6 +5,57 @@
     <title>Title</title>
 </head>
 <body>
-    <h1>没得权限！</h1>
+<h1>没得权限！</h1>
+<div class="login-box" style="">
+    <div  class="mobile-login">
+        <div  class="l_formline">
+            <div  class="el-input">
+                <input type="text" autocomplete="off" maxlength="11" placeholder="请输入手机号" class="el-input__inner">
+            </div>
+            <div  class="error">
+                <div  style="display: none;">
+                    <svg  aria-hidden="true" class="svg-icon">
+                        <use xlink:href="#icon-jinggao">
+                        </use>
+                    </svg>
+                    <span  class="error_txt">请输入正确手机号</span>
+                </div>
+            </div>
+        </div>
+        <div  class="l_formline">
+            <div  class="input-imgCode el-input">
+                <input type="text" autocomplete="off" maxlength="4" placeholder="请输入图形验证码" class="el-input__inner">
+            </div>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAAoBAMAAAD6VkJwAAAAG1BMVEXz+/6UfIPn6+7Du8Cfi5Krm6G3q7Hb29/Py8+hA4BMAAABpUlEQVQ4jc2VzU/CQBDFpxQpR15pgWOFGD0iYPTIlgQ52ijGI8QLR4yIHouK+mc7u0UgdmtaYoyT9Gub3857s9MtEZEBUOYwfp05GmmZUjIxh63Pk8gsgZb+jZLmxcdzADTDMhqAc12Jj++5QFNLmEzwfNPNyGrqhR2gq0WO0TIEzqOHOh8PfnQvmgtU2xrCQpntDJT4yYe48UjADVV2Lw9XaNwUYL9dCTuiIdXfsVJm9stS87bgtUnlBCN5/xLIGpnoBa5HgW11gPYgjuSB0/orooot4PB5GFqBX8StkHO5uiw1JUkt6Fga47JTweGp3He29RxHTFTlqrlqQRF1yNgndNBrCFxq3HMtnSnNmCupZBdE94eo1TFoUd5J6JcDQIAxo/hcAMJcgDPpgVlLU60olsLph0qVKphAtzHDUKvoexhRfU4QUk7omyvOjIE+d1DFo3E1HUKluUxjicoTNJ2tT1MqTvhi8hqmRWi1ERQD+GkR+vqoH1MTP24eSbHDvrYLs4u0/2znz5jsNdj834z0ENaRPqGxgbIpXCXMzBiZ5G1B+AQnQTS+vMwiJwAAAABJRU5ErkJggg==" class="img-code">
+            <div  class="error">
+                <div  style="display: none;">
+                    <svg  aria-hidden="true" class="svg-icon"><use xlink:href="#icon-jinggao"></use></svg>
+                    <span  class="error_txt"></span>
+                </div>
+            </div>
+        </div>
+        <div  class="l_formline">
+            <div  class="input-mobileCode el-input">
+                <input type="text" autocomplete="off" maxlength="6" placeholder="请输入验证码" class="el-input__inner">
+            </div>
+            <button  type="button" class="send-code">
+                <span  class="txt">发送验证码</span>
+                <span  class="times" style="display: none;"><span  class="time"></span>&nbsp;0S后重新发送</span>
+            </button>
+            <div  class="error">
+                <div  style="display: none;">
+                    <svg  aria-hidden="true" class="svg-icon"><use xlink:href="#icon-jinggao"></use></svg>
+                    <span  class="error_txt"></span>
+                </div>
+            </div>
+        </div>
+        <button  class="button-yellow button-yellow--big">
+            <span >登录</span>
+            <span  style="display: none;">登录中<img src="data:image/gif;base64,R0lGODlhLgAUAIABAP///////yH/C05FVFNDQVBFMi4wAwEAAAAh/wtYTVAgRGF0YVhNUDw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RDIyMjE5N0RCODJEMTFFOTg1RjBFODQ5QjIzQ0U0RjYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RDIyMjE5N0VCODJEMTFFOTg1RjBFODQ5QjIzQ0U0RjYiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpEMjIyMTk3QkI4MkQxMUU5ODVGMEU4NDlCMjNDRTRGNiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpEMjIyMTk3Q0I4MkQxMUU5ODVGMEU4NDlCMjNDRTRGNiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PgH//v38+/r5+Pf29fTz8vHw7+7t7Ovq6ejn5uXk4+Lh4N/e3dzb2tnY19bV1NPS0dDPzs3My8rJyMfGxcTDwsHAv769vLu6ubi3trW0s7KxsK+urayrqqmop6alpKOioaCfnp2cm5qZmJeWlZSTkpGQj46NjIuKiYiHhoWEg4KBgH9+fXx7enl4d3Z1dHNycXBvbm1sa2ppaGdmZWRjYmFgX15dXFtaWVhXVlVUU1JRUE9OTUxLSklIR0ZFRENCQUA/Pj08Ozo5ODc2NTQzMjEwLy4tLCsqKSgnJiUkIyIhIB8eHRwbGhkYFxYVFBMSERAPDg0MCwoJCAcGBQQDAgEAACH5BAUeAAEALAAAAAAuABQAAAInjI+py+0Po5y02ouz3rx7D4TiF4kj+ZghmqqsowJvE8/2jef6zm8FACH5BAUeAAEALBQACAAGAAYAAAIFhI+pywUAIfkEBR4AAQAsHwAIAAYABgAAAgWEj6nLBQA7"
+                                                  height="12">
+            </span>
+        </button>
+    </div>
+</div>
 </body>
 </html>

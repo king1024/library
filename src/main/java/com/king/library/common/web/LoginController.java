@@ -1,14 +1,7 @@
 package com.king.library.common.web;
 
-import com.alibaba.fastjson.JSONObject;
-import com.king.library.common.constants.UrlConstants;
 import com.king.library.common.model.MenuNode;
-import com.king.library.common.model.ResponseVo;
-import com.king.library.common.tools.CommonUtil;
 import com.king.library.common.tools.MenuTree;
-import com.king.library.common.tools.ResultUtil;
-import com.king.library.sys.pojo.SysResources;
-import com.king.library.sys.pojo.SysRole;
 import com.king.library.sys.pojo.SysUser;
 import com.king.library.sys.service.SysResourcesService;
 import com.king.library.sys.service.SysRoleService;
@@ -23,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -88,7 +80,7 @@ public class LoginController {
 			currentUser.logout();
 		} catch (Exception e) {
 		}
-		return "login";
+		return "login02";
 	}
 
 	@ResponseBody

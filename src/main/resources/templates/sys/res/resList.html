@@ -32,7 +32,10 @@
     <div property="columns">
         <div type="checkcolumn" ></div>
         <div type="indexcolumn" ></div>
-        <div field="id" width="120" headerAlign="center">id</div>
+        <div field="id" width="120" headerAlign="center">id
+            <input id="id" name="filterName" property="filter" class="mini-textbox" style="width:100%;"
+                   onvaluechanged="onFilterChanged" showClose="true" oncloseclick="oncloseclick"/>
+        </div>
         <div field="name" width="120" headerAlign="center" >资源名称
             <input property="editor" class="mini-textbox" style="width:100%;"/>
             <input id="name" name="filterName" property="filter" class="mini-textbox" style="width:100%;"

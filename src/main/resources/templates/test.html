@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.0rg">
+<head th:include="common.html"></head>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <img class="user-img" th:src="@{/image/user.jpg}" />
+    </div>
+</body>
+<script>
+    mini.parse();
+        /*
+        $.ajax({
+            url: "/resources/remove",
+            data: JSON.stringify(ids),
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (text) {
+                grid.reload();
+            }
+        });
+        */
+</script>
+</html>

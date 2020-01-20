@@ -17,6 +17,13 @@ function getFilterObj(){
     return param;
 }
 
+function oncloseclick(e){
+    var obj=e.sender;
+    obj.setText("");
+    obj.setValue("");
+    onFilterChanged();
+}
+
 function onFilterChanged(){
     grid.load({filterStr:JSON.stringify(getFilterObj())});
 }

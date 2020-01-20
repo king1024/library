@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.0rg">
+<head th:include="common.html"></head>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .brick{
+            height:160px;
+            width: 160px;
+            float: left;
+            padding: 5px;
+            border: 1px;
+        }
+
+        .brickImg{
+            height:150px;
+            width: 150px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div class="brick"><img class="brickImg" th:src="@{/image/user.jpg}" /></div>
+    <div class="brick"><img class="brickImg" th:src="@{/image/user.jpg}" /></div>
+    <div class="brick"><img class="brickImg" th:src="@{/image/user.jpg}" /></div>
+    <div class="brick"><img class="brickImg" th:src="@{/image/user.jpg}" /></div>
+    <div class="brick"><img class="brickImg" th:src="@{/image/user.jpg}" /></div>
+    <div class="brick"><img class="brickImg" th:src="@{/image/user.jpg}" /></div>
+    <div class="brick"><img class="brickImg" th:src="@{/image/user.jpg}" /></div>
+    <div class="brick"><img class="brickImg" th:src="@{/image/user.jpg}" /></div>
+    <div class="brick"><img class="brickImg" th:src="@{/image/user.jpg}" /></div>
+    <div class="brick"><img class="brickImg" th:src="@{/image/user.jpg}" /></div>
+</div>
+</body>
+<script>
+    mini.parse();
+        /*
+        $.ajax({
+            url: "/resources/remove",
+            data: JSON.stringify(ids),
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (text) {
+                grid.reload();
+            }
+        });
+        */
+</script>
+</html>
