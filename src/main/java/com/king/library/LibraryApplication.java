@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.king.library.sys.mapper")
+@MapperScan({"com.king.library.sys.mapper","com.king.library.book.mapper"})
 public class LibraryApplication {
 
     public static void main(String[] args) {

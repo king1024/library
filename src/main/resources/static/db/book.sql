@@ -1,0 +1,17 @@
+
+CREATE TABLE book(
+	id VARCHAR(64) PRIMARY KEY,
+	NAME VARCHAR(100),
+	book_catalog_id VARCHAR(64),
+	face_img VARCHAR(100),
+	auth VARCHAR(100),
+	book_content_id VARCHAR(64),
+	bak VARCHAR(200)
+);
+
+CREATE TABLE book_content(
+	id VARCHAR(64) PRIMARY KEY,
+	TYPE VARCHAR(2),
+	TEXT VARCHAR(5000),
+	title VARCHAR(100)
+);

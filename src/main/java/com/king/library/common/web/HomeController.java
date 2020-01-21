@@ -1,5 +1,6 @@
 package com.king.library.common.web;
 
+import com.king.library.common.constants.UrlConstants;
 import com.king.library.common.tools.StringTools;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,4 +34,10 @@ public class HomeController {
         }
         return path;
     }
+
+    @RequestMapping("/")
+    public String defaultPage(){
+        return UrlConstants.DEFAULT_PAGE;
+    }
+
 }

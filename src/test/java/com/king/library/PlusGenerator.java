@@ -29,7 +29,7 @@ public class PlusGenerator {
     private static String authorName = "duanyong";
     //要生成的表名
 //    private static String[] tables = {"sys_user","sys_user_role","sys_role","sys_role_resources","sys_resources"};
-    private static String[] tables = {"sys_code_set","sys_code_item"};
+    private static String[] tables = {"book","book_content"};
 //    table前缀
 //    SELECT * FROM sys_user;
 //    SELECT * FROM sys_user_role;

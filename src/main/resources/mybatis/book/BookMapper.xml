@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.king.library.book.mapper.BookMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.king.library.book.model.Book">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="book_catalog_id" property="bookCatalogId" />
+        <result column="face_img" property="faceImg" />
+        <result column="auth" property="auth" />
+        <result column="book_content_id" property="bookContentId" />
+        <result column="bak" property="bak" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, book_catalog_id, face, auth, book_content_id, bak
+    </sql>
+
+</mapper>

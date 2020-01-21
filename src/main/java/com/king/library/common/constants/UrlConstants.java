@@ -9,6 +9,10 @@ public class UrlConstants {
     /**
      * 登录页面
      */
+    public static String DEFAULT_PAGE="login";
+    /**
+     * 登录页面
+     */
     public static String LOGIN_URL="/page/login";
     /**
      * 退出url

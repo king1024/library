@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.0rg">
+<head th:include="common.html"></head>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div style="padding-bottom:5px;">
+    <table style="width:100%;">
+        <tr>
+            <td style="width:100%;">
+                <!--<span>资源名称：</span><input type="text" id="key"  />
+                <input type="button" value="查找" onclick="search()"/>-->
+            </td>
+            <td style="white-space:nowrap;">此行暂未开发
+                <a class="mini-button" iconCls="fa-plus" onclick="add()">增加</a>
+                <a class="mini-button" iconCls="fa-remove" onclick="batchForbid()">禁用</a>
+                <a class="mini-button" iconCls="fa-remove" onclick="remove()">删除</a>
+                <a class="mini-button" iconCls="fa-save" onclick="save()">保存</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="datagrid1" class="mini-datagrid" style="width:100%;height:550px;"
+     url="/book/datas"
+     idField="id" allowResize="true" multiSelect="true"
+     sizeList="[20,30,50,100]" pageSize="20" allowCellEdit="true" allowCellSelect="true"
+     showHeader="true" title="书本列表" showFilterRow="true">
+    <div property="columns">
+        <div type="checkcolumn" ></div>
+        <div type="indexcolumn" ></div>
+        <div field="id" width="120" headerAlign="center">id
+            <input id="id" name="filterName" property="filter" class="mini-textbox" style="width:100%;"
+                   onvaluechanged="onFilterChanged" showClose="true" oncloseclick="oncloseclick"/>
+        </div>
+        <div field="name" width="120" headerAlign="center" >书本名称
+            <input property="editor" class="mini-textbox" style="width:100%;"/>
+            <input id="name" name="filterName" property="filter" class="mini-textbox" style="width:100%;"
+                   onvaluechanged="onFilterChanged" showClose="true" oncloseclick="oncloseclick"/>
+        </div>
+        <div field="bookCatalogId" width="120" headerAlign="center" type="mini-textbox">书本类型ID
+        </div>
+        <div field="faceImg" width="120" headerAlign="center" type="mini-textbox">书本封面
+        </div>
+        <div field="auth" width="120" headerAlign="center" type="mini-textbox">作者
+        </div>
+        <div field="bookContentId" width="120" headerAlign="center" type="mini-textbox">bookContentId
+        </div>
+        <div field="bak" width="120" headerAlign="center" type="mini-textbox">bak
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    mini.parse();
+    var grid=mini.get("datagrid1");
+    grid.load();
+
+    function add() {
+        mini.open({
+            targetWindow: window,
+            url: "/page/sys/res/resDetail",
+            title: "新增资源", width: 600, height: 400,
+            onload: function () {
+                var iframe = this.getIFrameEl();
+                var data = { action: "new" };
+                iframe.contentWindow.SetData(data);
+            },
+            ondestroy: function (action) {
+                grid.reload();
+            }
+        });
+    }
+
+    function save(){
+        var data = grid.getChanges();
+        $.ajax({
+            url: "/resources/update",
+            data: JSON.stringify(data),
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (text) {
+                grid.reload();
+            }
+        });
+    }
+
+    function onIFRenderer(e) {
+        if (e.value == 1) return "是";
+        else return "否";
+    }
+
+    function batchForbid(){
+        var data = grid.getSelecteds();
+        if(data.length==0){
+            mini.alert("没有东西","友情提示");
+        }
+        var ids=new Array();
+        for(var item of data){
+            ids.push(item.id);
+        }
+        $.ajax({
+            url: "/resources/batchForbid",
+            data: JSON.stringify(ids),
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (text) {
+                if(text.status!="200"){
+                    mini.alert(text.message);
+                }
+                grid.reload();
+            }
+        });
+    }
+
+    function remove(){
+        var data = grid.getSelecteds();
+        if(data.length==0){
+            mini.alert("没有东西","友情提示");
+        }
+        var ids=new Array();
+        for(var item of data){
+            ids.push(item.id);
+        }
+        $.ajax({
+            url: "/resources/remove",
+            data: JSON.stringify(ids),
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (text) {
+                grid.reload();
+            }
+        });
+    }
+</script>
+</html>

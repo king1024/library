@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.0rg">
+<head th:include="common.html"></head>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        .item
+        {
+            float:left;
+            width:250px;
+            height:280px;
+            border:solid 1px #ccc;
+            border-radius:4px;
+            margin-left:4px;
+            margin-top:4px;
+        }
+        .item-inner
+        {
+            width:100%;
+        }
+        .item-image
+        {
+
+            height:200px;
+            width:185px;
+            margin:auto;
+            margin-top:8px;
+            display:block;
+        }
+
+        .item-text
+        {
+            text-align:left;
+            margin-left: 20px;
+            font-size:16px;
+            //font-family:"微软雅黑";
+            letter-spacing:5px;
+            //font-weight:bold;
+            padding-top:5px;
+        }
+
+        .item-action
+        {
+            text-align:right;
+            padding-right:6px;
+            float: right;
+            margin-right: 20px;
+        }
+
+        .button
+        {
+            /*display: inline-block;*/
+            padding: 3px 8px;
+            font-size: 13px;
+            font-weight: normal;
+            line-height: 1.4;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            color: #fff;
+            background-color: #337ab7;
+            border-color: #2e6da4;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>书本卡片</h1>
+    <div id="datagrid1" class="mini-datagrid" style="width:100%;height: 600px"
+         showHeader="false" url="/book/datas"  idField="id" allowResize="true" showPager="false"
+         viewType="cardview" itemRenderer="itemRenderer" showColumns="false">
+        <div property="columns">
+
+        </div>
+    </div>
+
+    <script>
+        mini.parse();
+        var grid = mini.get("datagrid1");
+        grid.load();
+        function itemRenderer(record, rowIndex, meta, grid) {
+            meta.rowCls = "item";
+            var html = '<div class="item-inner">'
+                + '<img class="item-image" src="/image/user.jpg"/>'
+                + '<div class="item-text">书名：' + record.name + '</div>'
+                + '<div class="item-text">作者：' + record.auth //+ '</div>'
+                +'<span class="item-action"><button class="button add">收藏</button></span></div></div>';
+            return html;
+        }
+        $(grid.el).on("click", ".add", function (event) {
+            var record = grid.getRowByEvent(event);
+            alert(record.name);
+
+        });
+    </script>
+
+</body>
+
+</html>

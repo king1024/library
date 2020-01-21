@@ -1,27 +1,32 @@
-package com.king.library.catalog.pojo;
+package com.king.library.book.model;
+
+import com.baomidou.mybatisplus.extension.activerecord.Model;
+import java.io.Serializable;
 
 /**
- * @date: 2019/12/11 16:16
- * @author: duanyong
- * @desc:
+ * <p>
+ * 
+ * </p>
+ *
+ * @author duanyong
+ * @since 2020-01-21
  */
-public class BookCatalog {
-    /*
-    create table book_catalog(
-        catalog_id varchar(64) primary key,
-        catalog_name varchar(150) not null,
-        areas varchar(10),
-        floors varchar(10),
-        create_date varchar(10),
-        create_user_id VARCHAR(64)
-    );
-    */
+public class BookCatalog extends Model<BookCatalog> {
+
+    private static final long serialVersionUID=1L;
+
     private String catalogId;
+
     private String catalogName;
+
     private String areas;
+
     private String floors;
+
     private String createDate;
+
     private String createUserId;
+
 
     public String getCatalogId() {
         return catalogId;
@@ -72,14 +77,19 @@ public class BookCatalog {
     }
 
     @Override
+    protected Serializable pkVal() {
+        return this.catalogId;
+    }
+
+    @Override
     public String toString() {
         return "BookCatalog{" +
-                "catalogId='" + catalogId + '\'' +
-                ", catalogName='" + catalogName + '\'' +
-                ", areas='" + areas + '\'' +
-                ", floors='" + floors + '\'' +
-                ", createDate='" + createDate + '\'' +
-                ", createUserId='" + createUserId + '\'' +
-                '}';
+        "catalogId=" + catalogId +
+        ", catalogName=" + catalogName +
+        ", areas=" + areas +
+        ", floors=" + floors +
+        ", createDate=" + createDate +
+        ", createUserId=" + createUserId +
+        "}";
     }
 }
