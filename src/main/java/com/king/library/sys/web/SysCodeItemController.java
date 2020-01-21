@@ -5,10 +5,7 @@ import com.king.library.common.model.PageVo;
 import com.king.library.common.model.SortFild;
 import com.king.library.sys.service.SysCodeItemService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -19,14 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
  * @author duanyong
  * @since 2020-01-07
  */
-@Controller
+@RestController
 @RequestMapping("/sysCodeItem")
 public class SysCodeItemController {
 
     @Autowired
     private SysCodeItemService sysCodeItemService;
 
-    @ResponseBody
     @RequestMapping("datas")
     public PageVo findAllResForPage(PageVo pageVo){
         SortFild sort=new SortFild();

@@ -8,11 +8,8 @@ import com.king.library.sys.pojo.SysCodeSet;
 import com.king.library.sys.service.SysCodeSetService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -25,7 +22,7 @@ import java.util.List;
  * @author duanyong
  * @since 2020-01-07
  */
-@Controller
+@RestController
 @RequestMapping("/sysCodeSet")
 public class SysCodeSetController {
 
@@ -33,14 +30,12 @@ public class SysCodeSetController {
     private SysCodeSetService sysCodeSetService;
 
     @RequiresPermissions("sysCodeSet:list")
-    @ResponseBody
     @RequestMapping("datas")
     public PageVo findAllResForPage(PageVo pageVo){
         pageVo = sysCodeSetService.findAllForPage(pageVo,null);
         return pageVo;
     }
 
-    @ResponseBody
     @RequestMapping("save")
     public ResponseVo save(@RequestBody SysCodeSet set) {
         if(StringTools.isEmpty(set.getSetName())){
@@ -50,13 +45,11 @@ public class SysCodeSetController {
         return sysCodeSetService.saveRecord(set);
     }
 
-    @ResponseBody
     @RequestMapping("batchUpdate")
     public ResponseVo batchUpdate(@RequestBody List<SysCodeSet> setList) {
         return sysCodeSetService.batchUpdate(setList);
     }
 
-    @ResponseBody
     @RequestMapping("update")
     public ResponseVo update(@RequestBody SysCodeSet set) {
         return sysCodeSetService.updateRecord(set);

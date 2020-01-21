@@ -1,21 +1,16 @@
 package com.king.library.sys.web;
 
-import com.alibaba.fastjson.JSONObject;
 import com.king.library.common.constants.StatusEnum;
 import com.king.library.common.model.PageVo;
 import com.king.library.common.model.ResponseVo;
-import com.king.library.common.tools.CommonUtil;
 import com.king.library.common.tools.StringTools;
 import com.king.library.sys.pojo.SysUser;
 import com.king.library.sys.service.SysUserRoleService;
 import com.king.library.sys.service.SysUserService;
-import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +19,7 @@ import java.util.Map;
  * @description: 用户/角色/权限相关controller
  * @date: 2017/11/2 10:19
  */
-@Controller
+@RestController
 @RequestMapping("/user")
 public class UserController {
 	@Autowired
@@ -36,14 +31,12 @@ public class UserController {
 	 * 查询用户列表
 	 */
 	@RequiresPermissions("user:list")
-	@ResponseBody
 	@RequestMapping("datas")
 	public PageVo listUser(PageVo pageVo) {
 		return sysUserService.listUser(pageVo);
 	}
 
 	@RequiresPermissions("user:updateRoles")
-	@ResponseBody
 	@RequestMapping("updateRoles")
 	public ResponseVo updateRoles(@RequestBody Map param) {
 		String userIdstr= StringTools.filterObject(param.get("userId"));
@@ -57,7 +50,6 @@ public class UserController {
 	}
 
 	@RequiresPermissions("user:add")
-	@ResponseBody
 	@RequestMapping("save")
 	public ResponseVo save(@RequestBody SysUser sysUser) {
 		if(StringTools.isEmpty(sysUser.getPassword())){
@@ -77,7 +69,6 @@ public class UserController {
 	}
 
 	@RequiresPermissions("user:delete")
-	@ResponseBody
 	@RequestMapping("remove")
 	public ResponseVo remove(@RequestBody List<String> resList) {
 		ResponseVo vo=new ResponseVo(StatusEnum.SUCCESS.getCode());

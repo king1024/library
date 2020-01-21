@@ -4,9 +4,9 @@ import com.king.library.common.model.MenuNode;
 import com.king.library.sys.pojo.SysMenu;
 import com.king.library.sys.service.SysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
  * @author: duanyong
  * @desc:
  */
-@Controller
+@RestController
 @RequestMapping("/sys/menu/")
 public class SysMenuController {
 
@@ -24,21 +24,18 @@ public class SysMenuController {
 
 
     @RequestMapping("list")
-    @ResponseBody
     public List<SysMenu> list() {
         List<SysMenu> menu = sysMenuService.findAll();
         return menu;
     }
 
     @RequestMapping("sidemenu")
-    @ResponseBody
     public List<MenuNode> sidemenu() {
         List<MenuNode> menu = sysMenuService.sidemenu();
         return menu;
     }
 
     @RequestMapping("sidemenu2")
-    @ResponseBody
     public List<MenuNode> sidemenu2() {
         List<MenuNode> menu = sysMenuService.sidemenu();
         return menu;

@@ -1,33 +1,26 @@
 package com.king.library.sys.web;
 
-import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.king.library.common.constants.StatusEnum;
 import com.king.library.common.model.PageVo;
 import com.king.library.common.model.ResponseVo;
 import com.king.library.common.model.TreeNode;
-import com.king.library.common.tools.StringTools;
 import com.king.library.sys.pojo.SysResources;
 import com.king.library.sys.service.SysResourcesService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.HashMap;
+import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @date: 2019/12/26 20:02
  * @author: duanyong
  * @desc:
  */
-@Controller
+@RestController
 @RequestMapping("/resources/")
 public class ResourcesController {
 
@@ -35,7 +28,6 @@ public class ResourcesController {
     private SysResourcesService sysResourcesService;
 
     @RequiresPermissions("resource:list")
-    @ResponseBody
     @RequestMapping("datas")
     public PageVo findAllResForPage(PageVo pageVo){
         pageVo = sysResourcesService.findAllResForPage(pageVo);
@@ -43,7 +35,6 @@ public class ResourcesController {
     }
 
     @RequiresPermissions("resource:list")
-    @ResponseBody
     @RequestMapping("treeData")
     public List<TreeNode> getTreeData(int roleId){
         List<TreeNode> treeNodes = sysResourcesService.getTreeData(roleId);
@@ -51,7 +42,6 @@ public class ResourcesController {
     }
 
     @RequiresPermissions("resource:list")
-    @ResponseBody
     @RequestMapping("selectData")
     public List<SysResources> selectData(){
         SysResources res=new SysResources();
@@ -63,7 +53,6 @@ public class ResourcesController {
     }
 
     @RequiresPermissions("resource:add")
-    @ResponseBody
     @RequestMapping("save")
     public ResponseVo save(@RequestBody SysResources res) {
         if(res.getParentId()==null){
@@ -73,7 +62,6 @@ public class ResourcesController {
     }
 
     @RequiresPermissions("resource:update")
-    @ResponseBody
     @RequestMapping("update")
     public ResponseVo updateRes(@RequestBody List<SysResources> resList){
         return sysResourcesService.updateRes(resList);
@@ -85,7 +73,6 @@ public class ResourcesController {
      * @return
      */
     @RequiresPermissions("resource:batchForbid")
-    @ResponseBody
     @RequestMapping("batchForbid")
     @Transactional
     public ResponseVo batchForbid(@RequestBody List<String> resList){
@@ -95,7 +82,6 @@ public class ResourcesController {
     }
 
     @RequiresPermissions("resource:delete")
-    @ResponseBody
     @RequestMapping("remove")
     @Transactional
     public ResponseVo removeRes(@RequestBody List<String> resList){

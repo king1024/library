@@ -8,10 +8,10 @@ import com.king.library.sys.pojo.SysRole;
 import com.king.library.sys.service.SysRoleResourcesService;
 import com.king.library.sys.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
@@ -21,7 +21,7 @@ import java.util.Map;
  * @author: duanyong
  * @desc:
  */
-@Controller
+@RestController
 @RequestMapping("/sysRole/")
 public class SysRoleController {
 
@@ -30,20 +30,17 @@ public class SysRoleController {
     @Autowired
     private SysRoleResourcesService sysRoleResourcesService;
 
-    @ResponseBody
     @RequestMapping("datas")
     public PageVo findAllRoles(PageVo pageVo){
         return sysRoleService.findAllRoles(pageVo);
     }
 
-    @ResponseBody
     @RequestMapping("getDataByUserId")
     public List<SysRole> getDataByUserId(int userId){
         return sysRoleService.findRolesByUser(userId);
     }
 
 
-    @ResponseBody
     @RequestMapping("updateRoleRes")
     public ResponseVo updateRoleRes(@RequestBody Map param) {
         String roleIdstr= StringTools.filterObject(param.get("roleId"));
@@ -56,7 +53,6 @@ public class SysRoleController {
         return sysRoleResourcesService.updateRoleRes(roleId,resIds);
     }
 
-    @ResponseBody
     @RequestMapping("save")
     public ResponseVo save(@RequestBody SysRole sysRole) {
         sysRole.setAvailable(1);
@@ -65,13 +61,11 @@ public class SysRoleController {
         return vo;
     }
 
-    @ResponseBody
     @RequestMapping("update")
     public ResponseVo update(@RequestBody List<SysRole> sysUserList) {
         return sysRoleService.batchUpdate(sysUserList);
     }
 
-    @ResponseBody
     @RequestMapping("remove")
     public ResponseVo remove(@RequestBody List<String> resList) {
         ResponseVo vo=new ResponseVo(StatusEnum.SUCCESS.getCode());
